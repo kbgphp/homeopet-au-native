@@ -1,0 +1,29 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Angelina.ttf",
+      "sha1": "abbe63ebab6afe877e39237a9c01ca3dd2d59dba"
+    },
+    {
+      "path": "src/assets/fonts/Montserrat.ttf",
+      "sha1": "b30f63a27bcdc61c2458d0ddfbbe738a01e39714"
+    },
+    {
+      "path": "src/assets/fonts/PTSans-Bold.ttf",
+      "sha1": "356c8987ef7a8752108cf7b7a86d1f1bf0c60999"
+    },
+    {
+      "path": "src/assets/fonts/PTSans-Regular.ttf",
+      "sha1": "641626d5d6a625a1e46e09ceb806cf33d1c1867e"
+    },
+    {
+      "path": "src/assets/fonts/PTSerif-Bold.ttf",
+      "sha1": "bd3420a64f17abba655c59bcd47bbff015e98e9b"
+    },
+    {
+      "path": "src/assets/fonts/PTSerif-Regular.ttf",
+      "sha1": "954241a37698c9cbb040a7ce005b02646bc68cde"
+    }
+  ]
+}
