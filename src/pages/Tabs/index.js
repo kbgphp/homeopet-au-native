@@ -7,7 +7,7 @@ import ProductsTab from '../TabsPages/ProductsTab';
 import SearchTab from '../TabsPages/SearchTab';
 import SymptomsCheckerTab from '../TabsPages/SymptomsCheckerTab';
 import { LogoTitle } from '../../components/elements';
-import { HeaderRight } from '../../components/global';
+import { HeaderRight, } from '../../components/global';
 
 
 const Tab = createBottomTabNavigator();
@@ -15,7 +15,7 @@ export default function Tabs(props) {
     const theme = useTheme();
     return (
 
-        <Tab.Navigator initialRouteName="Search"
+        <Tab.Navigator initialRouteName="Home"
             activeColor={theme.colors.$pink}
             inactiveColor={theme.colors.$menu}
             barStyle={{ backgroundColor: theme.colors.$light_gray }}

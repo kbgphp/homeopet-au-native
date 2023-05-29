@@ -3,12 +3,16 @@ import { useTheme } from 'react-native-paper';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { CountryDropdown, LanguageDropdown, RangeSlider, ModalPopUp } from "./components"
-// import { CONFIG } from "../../../config"
+import { CONFIG } from "../../../config";
 import { Switch } from "../../../components/elements";
 import { BackIconButton } from "../../../components/global"
 
 export default function AppSetting(props) {
-    useEffect(() => { props.navigation.setOptions({ headerLeft: () => <BackIconButton props={props} />, }) }, [])
+    useEffect(() => {
+        props.navigation.setOptions({
+            headerLeft: () => <BackIconButton props={props} />,
+        })
+    }, [])
     const theme = useTheme();
     const styles = makeStyles(theme);
     const [storeRatingModalOpen, setStoreRatingModalOpen] = useState(false);
@@ -16,7 +20,7 @@ export default function AppSetting(props) {
     const [sliderValue, setSliderValue] = useState(6);
 
     const goTo = (url) => {
-       
+
     }
 
 
@@ -124,8 +128,7 @@ export default function AppSetting(props) {
                     </TouchableOpacity>
                 </View>
                 <View>
-                    {/* <Text style={styles.versionText} >v{CONFIG?.VERSION}</Text> */}
-                    <Text style={styles.versionText} >v{'0.1'}</Text>
+                    <Text style={styles.versionText} >v{CONFIG?.VERSION}</Text>
                 </View>
 
                 < ModalPopUp

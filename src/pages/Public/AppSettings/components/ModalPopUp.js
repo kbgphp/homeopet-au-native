@@ -49,13 +49,12 @@ export default ({
                         <Text style={styles.bodyText}>Thanks for feedback. If you want to
                             report a problem or tell us how to
                             improve we would love to hear from you.</Text>
-
                         <View style={styles.btnGroup}>
                             <TouchableOpacity activeOpacity={0.8} style={styles.button} onPress={() => { setContactSupportModalOpen(!contactSupportModalOpen) }}>
-                                <Text style={styles.actionBtnText}>{"Close"}</Text>
+                                <Text style={styles.actionBtnText}>{"No Thanks"}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity activeOpacity={0.8} style={styles.button} >
-                                <Text style={styles.actionBtnText}>{"Contact"}</Text>
+                                <Text style={styles.actionBtnText}>{"Okay"}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -80,7 +79,7 @@ const makeStyles = (theme) => StyleSheet.create({
         margin: 8,
         padding: 16,
         width: 280,
-        height: 144,
+        // height: 160,
         borderRadius: 6,
         backgroundColor: 'white',
         shadowColor: '#000',
