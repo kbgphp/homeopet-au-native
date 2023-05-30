@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
-import { View, Text,  Platform, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text,  Platform, TouchableOpacity,Linking, StyleSheet } from 'react-native';
 import Modal from "react-native-modal";
 
 
@@ -8,10 +8,13 @@ export default ({
     storeRatingModalOpen,
     contactSupportModalOpen,
     setStoreRatingModalOpen,
-    setContactSupportModalOpen
+    setContactSupportModalOpen,
+    rateAppOnStore,
+    openContactPage
 }) => {
     const theme = useTheme();
     const styles = makeStyles(theme);
+
     return (
         <View style={[styles.centeredView, { opacity: 0.1 }]}>
             <Modal
@@ -27,10 +30,10 @@ export default ({
 
                         <View style={styles.btnGroup}>
                             <TouchableOpacity activeOpacity={0.8} style={[styles.button, { marginEnd: 18 }]} onPress={() => { setStoreRatingModalOpen(!storeRatingModalOpen) }} >
-                                <Text style={styles.actionBtnText}>{"Close"}</Text>
+                                <Text style={styles.actionBtnText}>{"No Thanks"}</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity activeOpacity={0.8} style={styles.button} >
-                                <Text style={styles.actionBtnText}>{"Contact"}</Text>
+                            <TouchableOpacity activeOpacity={0.8} style={styles.button} onPress={rateAppOnStore} >
+                                <Text style={styles.actionBtnText}>{"Okay"}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -51,10 +54,10 @@ export default ({
                             improve we would love to hear from you.</Text>
                         <View style={styles.btnGroup}>
                             <TouchableOpacity activeOpacity={0.8} style={styles.button} onPress={() => { setContactSupportModalOpen(!contactSupportModalOpen) }}>
-                                <Text style={styles.actionBtnText}>{"No Thanks"}</Text>
+                                <Text style={styles.actionBtnText}>{"Close"}</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity activeOpacity={0.8} style={styles.button} >
-                                <Text style={styles.actionBtnText}>{"Okay"}</Text>
+                            <TouchableOpacity activeOpacity={0.8} style={styles.button}  onPress={openContactPage}>
+                                <Text style={styles.actionBtnText}>{"Contact Us"}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

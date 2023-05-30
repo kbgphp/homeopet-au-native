@@ -46,10 +46,9 @@ export const fetchProducts = (symptom_id) => async dispatch => {
   try {
     dispatch(productsFetchStart());
     const res = await _REST.CUSTOM_POST("symptom-products", { symptom_id });
-    dispatch(productsFetchSuccess(res?.data?.medicines));
+    dispatch(res?.data ? productsFetchSuccess(res?.data?.medicines) : productsFetchError())
     return res.data
   } catch (e) {
-    console.log('e: ', e);
     dispatch(productsFetchError());
   }
 }

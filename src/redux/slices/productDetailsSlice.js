@@ -49,14 +49,12 @@ export const productDetailsSliceSelector = (state) => state;
 
 // User Actions
 export const fetchProductDetails = (product_id) => async dispatch => {
-  console.log('product_id slice: ', product_id);
   try {
     dispatch(productDetailsFetchStart());
-    const res = await _REST.CUSTOM_POST("product", { product_id:product_id, origin: 'au' });
-    dispatch(productDetailsFetchSuccess(res?.data));
+    const res = await _REST.CUSTOM_POST("product", { product_id: product_id, origin: 'au' });
+    dispatch(res?.data ? productDetailsFetchSuccess(res?.data) : productDetailsFetchError())
     return res.data;
   } catch (e) {
-    console.log('e: ', e);
     dispatch(productDetailsFetchError());
   }
 }

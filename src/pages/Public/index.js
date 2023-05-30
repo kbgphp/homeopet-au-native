@@ -7,3 +7,4 @@ export { default as BlogDetails } from "./BlogDetails";
 export { default as ContactUs } from "./ContactUs";
 export { default as FAQs } from "./FAQs";
 export { default as Testimonials } from "./Testimonials";
+export { default as WebInView } from "./WebInView";

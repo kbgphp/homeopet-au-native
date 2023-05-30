@@ -6,25 +6,27 @@ import { PinkHeaderWithBird } from "../../../../components/elements"
 
 
 
-export default ({props,featuredProduct}) => {
+export default ({ props, featuredProduct }) => {
     const theme = useTheme();
     const styles = makeStyles(theme);
     const viewProduct = (id) => {
-        props.navigation.navigate('ProductDetails',{ productId: id});
+        props.navigation.navigate('ProductDetails', { productId: id });
     }
- 
-    
+
+
     return (
         <View style={styles.featuredProductBox}>
             <View style={{ alignItems: 'center' }} >
                 <PinkHeaderWithBird text={'Featured Products'} />
             </View>
-            <Image style={styles.featuredProductImg} source={{ uri: featuredProduct?.banner  }} />
-            <Text style={styles.featuredText}>{trimText(140, featuredProduct?.single_product?.content)}
-                <TouchableOpacity activeOpacity={.8} onPress={() => viewProduct(featuredProduct?.single_product?.id)}>
+            <TouchableOpacity activeOpacity={.8} onPress={() => viewProduct(featuredProduct?.single_product?.id)}>
+                <Image style={styles.featuredProductImg} source={{ uri: featuredProduct?.banner }} />
+            </TouchableOpacity>
+            <TouchableOpacity activeOpacity={.8} onPress={() => viewProduct(featuredProduct?.single_product?.id)}>
+                <Text style={styles.featuredText}>{trimText(140, featuredProduct?.single_product?.content)}
                     <Text style={styles.viewProduct}>{"view product"}</Text>
-                </TouchableOpacity>
-            </Text>
+                </Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -52,7 +54,8 @@ const makeStyles = (theme) => StyleSheet.create({
         lineHeight: 16,
     },
     viewProduct: {
-        fontWeight: 600,
+        fontWeight: 500,
         color: theme.colors.$green,
+        fontFamily: theme.fonts.$sansReg,
     },
 });

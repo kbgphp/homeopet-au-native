@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
-import { StyleSheet, Text, Image, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, Image,Linking, View, ScrollView, TouchableOpacity } from 'react-native';
 import { BackTextButton, ProductListItem, QuickSearch } from "../../components/global";
-// import * as WebBrowser from 'expo-web-browser';
+
 
 import { PinkButton, ActivityLoader } from "../../components/elements"
 import SegmentSelector from "./components/SegmentSelector";
@@ -31,8 +31,7 @@ export default function ProductDetails(props) {
             if (!!productId) {
                 dispatch(fetchProductDetails(productId)).then((res) => { setDataLoaded(true); })
                 if (error) {
-                    console.log('rrrrrr');
-                    // props.navigation.goBack()
+                    props.navigation.goBack();
                 }
             }
         };
@@ -42,9 +41,11 @@ export default function ProductDetails(props) {
 
 
     const goTo = async (type) => {
-        // await WebBrowser.openBrowserAsync(`https://www.homeopet.com/${(type === 'Instore') ? 'shop' : `?p=${productId}`}`);
+        await Linking.openURL(`https://homeopet.com.au/collections/all-products/${(type === 'Instore') ? '' : `?p=${productId}`}`);
     };
 
+
+   
 
     const imageClicked = async (i) => {
         props.navigation.navigate('ProductImagesSlider',{imgIndex:i});
@@ -108,7 +109,5 @@ const makeStyles = (theme) => StyleSheet.create({
         fontWeight: 400,
         fontFamily: theme.fonts.$sansReg,
     },
-
-
 
 });

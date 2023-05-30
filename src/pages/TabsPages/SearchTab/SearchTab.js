@@ -37,7 +37,7 @@ export default function SearchTab(props) {
             <QuickSearch props={props} />
 
             <ScrollView style={styles.scrollView} nestedScrollEnabled={true} showsVerticalScrollIndicator={false}>
-                {isProcessing && <Spinner visible customIndicator={<ActivityLoader />} />}
+                {isProcessing && <Spinner visible  customIndicator={<ActivityLoader />} />}
                 <View style={{ backgroundColor: 'white' }}>
                     <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                         <PinkHeaderWithSticker text={'Select Common Symptoms'} />

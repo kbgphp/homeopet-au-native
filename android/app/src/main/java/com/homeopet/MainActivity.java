@@ -1,4 +1,4 @@
-package com.homeopet;
+package com.homeopet.au;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

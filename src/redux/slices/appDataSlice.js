@@ -44,9 +44,7 @@ export const getAppData = () => async dispatch => {
   try {
     dispatch(appDataFetchStart());
     const res = await _REST.POST("tabs-data", { "origin": "au" });
-    if (res?.data) {
-      dispatch(appDataFetchSuccess(res?.data));
-    }
+    dispatch(res?.data ? appDataFetchSuccess(res?.data) : appDataFetchError());
     return res?.data
   } catch (e) {
     dispatch(appDataFetchError());

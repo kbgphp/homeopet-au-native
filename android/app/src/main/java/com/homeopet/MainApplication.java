@@ -1,4 +1,4 @@
-package com.homeopet;
+package com.homeopet.au;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

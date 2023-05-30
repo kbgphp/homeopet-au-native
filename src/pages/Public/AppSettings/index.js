@@ -1,30 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { useTheme } from 'react-native-paper';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Linking, StyleSheet, Platform, ScrollView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { CountryDropdown, LanguageDropdown, RangeSlider, ModalPopUp } from "./components"
 import { CONFIG } from "../../../config";
 import { Switch } from "../../../components/elements";
 import { BackIconButton } from "../../../components/global"
+import { useSelector, useDispatch } from 'react-redux';
+
 
 export default function AppSetting(props) {
-    useEffect(() => {
-        props.navigation.setOptions({
-            headerLeft: () => <BackIconButton props={props} />,
-        })
-    }, [])
+    useEffect(() => { props.navigation.setOptions({ headerLeft: () => <BackIconButton props={props} />, }) }, [])
     const theme = useTheme();
     const styles = makeStyles(theme);
     const [storeRatingModalOpen, setStoreRatingModalOpen] = useState(false);
     const [contactSupportModalOpen, setContactSupportModalOpen] = useState(false);
     const [sliderValue, setSliderValue] = useState(6);
+    const APP_DATA = useSelector((state) => state.appData?.BIG_DATA?.home);
 
-    const goTo = (url) => {
-
+    const goTo = async (url, title) => {
+        props?.navigation?.navigate('WebInView', { url: url, title: title });
     }
 
-
-
+    const openContactPage = () => {
+        props?.navigation?.navigate('ContactUs');
+        setContactSupportModalOpen(false);
+    }
+    const rateAppOnStore = async () => {
+        await Linking.openURL(Platform.OS === 'android' ? APP_DATA?.google_play_url : APP_DATA?.apple_store_url);
+        setStoreRatingModalOpen(false);
+    }
 
 
     const [isCompetitionOn, setIsCompetitionOn] = useState(false);
@@ -86,13 +91,13 @@ export default function AppSetting(props) {
                         <Text style={styles.pinkText}>{"Legal"}</Text>
                     </View>
 
-                    <TouchableOpacity activeOpacity={0.8} onPress={() => goTo('term_page_url')} style={[styles.bottomBorder, { paddingVertical: 8 }]} >
+                    <TouchableOpacity activeOpacity={0.8} onPress={() => goTo(APP_DATA?.terms_conditions_url, 'Terms of Use')} style={[styles.bottomBorder, { paddingVertical: 8 }]} >
                         <View style={[styles.listItem,]}>
                             <Text style={styles.bodyText}>{"Terms of Use"}</Text>
                             <FontAwesome name={'angle-right'} style={styles.arrowIcon} />
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={0.8} onPress={() => goTo('term_page_url')} style={[styles.bottomBorder, { paddingVertical: 8 }]}>
+                    <TouchableOpacity activeOpacity={0.8} onPress={() => goTo(APP_DATA?.privacy_policy_url, 'Data Protection & Privacy')} style={[styles.bottomBorder, { paddingVertical: 8 }]}>
                         <View style={[styles.listItem]}>
                             <Text style={styles.bodyText}>{"Data Protection & Privacy Statement"}</Text>
                             <FontAwesome name={'angle-right'} style={styles.arrowIcon} />
@@ -120,7 +125,7 @@ export default function AppSetting(props) {
                     </View>
                 </View>
                 <View>
-                    <TouchableOpacity activeOpacity={0.8} onPress={() => goTo('term_page_url')} style={[styles.bottomBorder, { paddingVertical: 8 }]} >
+                    <TouchableOpacity activeOpacity={0.8} onPress={() => props?.navigation?.navigate('ContactUs')} style={[styles.bottomBorder, { paddingVertical: 8 }]} >
                         <View style={[styles.listItem]}>
                             <Text style={styles.bodyText}>{"Help & Support"}</Text>
                             <FontAwesome name={'angle-right'} style={styles.arrowIcon} />
@@ -136,6 +141,8 @@ export default function AppSetting(props) {
                     contactSupportModalOpen={contactSupportModalOpen}
                     setStoreRatingModalOpen={setStoreRatingModalOpen}
                     setContactSupportModalOpen={setContactSupportModalOpen}
+                    openContactPage={openContactPage}
+                    rateAppOnStore={rateAppOnStore}
                 />
             </ScrollView>
         </>

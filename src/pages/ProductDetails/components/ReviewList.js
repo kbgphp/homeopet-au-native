@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-
+import { format, formatDistance, formatRelative, subDays } from 'date-fns'
 
 export default ({ data }) => {
     const theme = useTheme();
@@ -11,8 +11,8 @@ export default ({ data }) => {
             {!!data && data?.length > 0 ?
                 (data.map((item, i) => (
                     <View key={i} style={[styles.listItem, (i !== data?.length - 1) ? styles.bottomBorder : '', { paddingTop: (i !== 0) ? 6 : 2 }]}>
-                        <Text style={styles.bodyText}>"{item?.comment_content}"</Text>
-                        <Text style={styles.author}>{item?.comment_author} - <Text style={styles.date}>{item?.comment_date}</Text></Text>
+                        <Text style={styles.bodyText}>"{item?.body}"</Text>
+                        <Text style={styles.author}>{item?.author} - <Text style={styles.date}>{format(new Date(item?.review_date), "MMMM do, yyyy")}</Text></Text>
                     </View>
                 )))
                 : (
