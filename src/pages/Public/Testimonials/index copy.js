@@ -31,32 +31,29 @@ export default function Testimonials(props) {
 
   const fetchBlogData = async () => {
     const res = await _REST.CUSTOM_POST("pages", {
-      "page": "reviews",
-      "paged": 1,
-      "review_per_page": 10,
-      "origin": "au"
+      page: "reviews",
+      record_per_page: 7,
+      review_per_page: 10,
+      paged: Pages,
     });
 
-    formatData(res?.data?.review);
-    // setTestimonialsData([...testimonialsdata, ...res?.data?.review]);
+    if (res?.data)
+      setTestimonialsData([...testimonialsdata, ...res?.data?.review]);
 
-  };
 
-  const fetchMoreData = () => {
-    if (Pages < totalPages) {
-      setPages(Pages + 1);
-      setLoading(true);
+      
+    if (res?.data?.total_pages) {
+      setTotalPages(res?.data?.total_pages);
     }
+    setLoading(false);
   };
 
-
-  let Arr = [];
-  const formatData = async (data) => {
-    Object.entries(data).map(([key, value]) => {
-      Arr.push({ title: key, data: value })
-    })
-    console.log('Arr', Arr);
-  }
+  // const fetchMoreData = () => {
+  //   if (Pages < totalPages) {
+  //     setPages(Pages + 1);
+  //     setLoading(true);
+  //   }
+  // };
 
   const header = () => <Text style={styles.bodyText}>{"Testimonials"}</Text>;
 
@@ -64,10 +61,35 @@ export default function Testimonials(props) {
     <>
       <NavBar props={props} />
 
-
-      <Text>hello</Text>
-
-
+      {testimonialsdata && testimonialsdata?.length > 0 ? (
+        <Text>hello</Text>
+        // <FlatList
+        //   data={testimonialsdata}
+        //   ListHeaderComponent={header}
+        //   renderItem={(ele, i) => (
+        //     <View style={[styles.item, ele.index % 2 !== 0 && styles.oddItem]}>
+        //       <Text style={styles.header}>{ele?.item?.title}</Text>
+        //       <Swiper
+        //         innerContainerStyle={{ height: 350 }}
+        //         controlsProps={{ prevPos: false, nextPos: false }}
+        //       >
+        //         {ele?.item?.desc.map((item, i) => {
+        //           return (
+        //             <View key={i}>
+        //               <Text style={styles.contant}>{item.content}</Text>
+        //             </View>
+        //           );
+        //         })}
+        //       </Swiper>
+        //     </View>
+        //   )}
+        //   keyExtractor={(item, i) => i}
+        //   onEndReached={fetchMoreData}
+        //   style={{ backgroundColor: "#ffffff" }}
+        // />
+      ) : (
+        <ActivityLoader />
+      )}
 
       {loading && (
         <View>
@@ -75,7 +97,7 @@ export default function Testimonials(props) {
           <Text style={styles.loaderText}>Loading more data...</Text>
         </View>
       )}
-
+      
     </>
   );
 }

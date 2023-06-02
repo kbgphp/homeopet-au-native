@@ -6,7 +6,7 @@ import Swiper from 'react-native-web-swiper';
 import { getDimension } from '../../../utils';
 import { useSelector, useDispatch } from 'react-redux';
 import { appOpened } from '../../../redux/slices/isFirstTimeSlice';
-import { getAppData, appDataSliceSelector } from '../../../redux/slices/appDataSlice';
+import { getAppData } from '../../../redux/slices/appDataSlice';
 import { ActivityLoader } from "../../../components/elements"
 
 export default function WelcomeScreen(props) {
@@ -20,7 +20,8 @@ export default function WelcomeScreen(props) {
     const goTo = (num) => {
         swiperRef.current.goTo(num);
     }
-    const { BIG_DATA } = useSelector(appDataSliceSelector);
+
+    const BIG_DATA = useSelector((state) => state.appData?.BIG_DATA);
 
     const goToHome = () => {
         if (!!BIG_DATA?.home) {

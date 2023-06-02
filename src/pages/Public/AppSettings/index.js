@@ -7,16 +7,20 @@ import { CONFIG } from "../../../config";
 import { Switch } from "../../../components/elements";
 import { BackIconButton } from "../../../components/global"
 import { useSelector, useDispatch } from 'react-redux';
-
+import { setCompetitionSetting, setNewAndSeasonalProductSetting, setBlogSetting, } from '../../../redux/slices/notificationSlice';
 
 export default function AppSetting(props) {
     useEffect(() => { props.navigation.setOptions({ headerLeft: () => <BackIconButton props={props} />, }) }, [])
     const theme = useTheme();
     const styles = makeStyles(theme);
+    const dispatch = useDispatch();
+
     const [storeRatingModalOpen, setStoreRatingModalOpen] = useState(false);
     const [contactSupportModalOpen, setContactSupportModalOpen] = useState(false);
     const [sliderValue, setSliderValue] = useState(6);
     const APP_DATA = useSelector((state) => state.appData?.BIG_DATA?.home);
+    const NOTIFICATION = useSelector((state) => state?.notification);
+    console.log('NOTIFICATION: ', NOTIFICATION);
 
     const goTo = async (url, title) => {
         props?.navigation?.navigate('WebInView', { url: url, title: title });
@@ -31,14 +35,9 @@ export default function AppSetting(props) {
         setStoreRatingModalOpen(false);
     }
 
-
-    const [isCompetitionOn, setIsCompetitionOn] = useState(false);
-    const [isSeasonalAndNewOn, setIsSeasonalAndNewOn] = useState(false);
-    const [isBlogOn, setIsBlogOn] = useState(false);
-
-    const toggleCompetition = () => setIsCompetitionOn(isCompetitionOn => !isCompetitionOn);
-    const toggleSeasonalAndNew = () => setIsSeasonalAndNewOn(isSeasonalAndNewOn => !isSeasonalAndNewOn);
-    const toggleBlog = () => setIsBlogOn(isBlogOn => !isBlogOn);
+    const toggleCompetition = () => dispatch(setCompetitionSetting(!NOTIFICATION?.competitionNotificationOn));
+    const toggleSeasonalAndNew = () => dispatch(setNewAndSeasonalProductSetting(!NOTIFICATION?.newProductNotificationOn));
+    const toggleBlog = () => dispatch(setBlogSetting(!NOTIFICATION?.blogNotificationOn));
 
     const sliderValueChanged = ({ value }) => {
         value >= 8 ? setStoreRatingModalOpen(true) : setContactSupportModalOpen(true);
@@ -74,15 +73,15 @@ export default function AppSetting(props) {
                     </View>
                     <View style={[styles.listItem, styles.bottomBorder]}>
                         <Text style={styles.bodyText}>{"Competitions"}</Text>
-                        <Switch value={isCompetitionOn} disabled={false} toggleSwitch={toggleCompetition} />
+                        <Switch value={NOTIFICATION?.competitionNotificationOn} disabled={false} toggleSwitch={toggleCompetition} />
                     </View>
                     <View style={[styles.listItem, styles.bottomBorder]}>
                         <Text style={styles.bodyText}>{"Seasonal & New Products"}</Text>
-                        <Switch value={isSeasonalAndNewOn} disabled={false} toggleSwitch={toggleSeasonalAndNew} />
+                        <Switch value={NOTIFICATION?.newProductNotificationOn} disabled={false} toggleSwitch={toggleSeasonalAndNew} />
                     </View>
                     <View style={[styles.listItem, styles.bottomBorder]}>
                         <Text style={styles.bodyText}>{"Latest from the HomeoPet Blog"}</Text>
-                        <Switch value={isBlogOn} disabled={false} toggleSwitch={toggleBlog} />
+                        <Switch value={NOTIFICATION?.blogNotificationOn} disabled={false} toggleSwitch={toggleBlog} />
                     </View>
                 </View>
 

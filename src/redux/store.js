@@ -5,6 +5,7 @@ import isFirstTimeSlice from "./slices/isFirstTimeSlice";
 import appDataSlice from "./slices/appDataSlice";
 import productsListSlice from "./slices/productsListSlice";
 import productDetailsSlice from "./slices/productDetailsSlice";
+import notificationSlice from "./slices/notificationSlice";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   isFirstTime:isFirstTimeSlice,
   appData:appDataSlice,
   recProducts:productsListSlice,
-  productData:productDetailsSlice
+  productData:productDetailsSlice,
+  notification:notificationSlice
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
