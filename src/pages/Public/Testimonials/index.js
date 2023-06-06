@@ -1,111 +1,136 @@
 import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  Image,
-  View,
-  TouchableOpacity,
-  ActivityIndicator,
-  ScrollView,
-  FlatList,
-} from "react-native";
-
+import { StyleSheet, Text, View, ActivityIndicator, FlatList, } from "react-native";
+import Swiper from "react-native-web-swiper";
+import { useSelector } from 'react-redux';
 import { useTheme } from "react-native-paper";
 import { NavBar } from "../../../components/global";
 import { _REST } from "../../../services";
-import Swiper from "react-native-web-swiper";
 import { ActivityLoader } from "../../../components/elements";
 
 export default function Testimonials(props) {
   const theme = useTheme();
   const styles = makeStyles(theme);
+  const TESTIMONIALS = useSelector((state) => state.appData.BIG_DATA.testimonials);
+  const [testimonialsData, setTestimonialsData] = React.useState({});
 
-  const [testimonialsdata, setTestimonialsData] = useState([]);
   const [Pages, setPages] = React.useState(1);
   const [loading, setLoading] = React.useState(false);
   const [totalPages, setTotalPages] = React.useState(0);
 
-  React.useEffect(() => {
-    fetchBlogData();
-  }, [Pages]);
 
-  const fetchBlogData = async () => {
+  useEffect(() => {
+    setTestimonialsData(TESTIMONIALS);
+    setTotalPages(TESTIMONIALS.total_pages)
+  }, [TESTIMONIALS]);
+
+
+  const fetchTestimonialsData = async () => {
     const res = await _REST.CUSTOM_POST("pages", {
-      "page": "reviews",
-      "paged": 1,
-      "review_per_page": 10,
+      page: "reviews",
+      review_per_page: 10,
+      paged: Pages,
       "origin": "au"
     });
 
-    formatData(res?.data?.review);
-    // setTestimonialsData([...testimonialsdata, ...res?.data?.review]);
+    if (res?.data?.review) {
+      setTestimonialsData((prevData) => ({
+        ...prevData,
+        ...res.data,
+        review: {
+          ...prevData.review,
+          ...res.data.review,
+        }
+      }));
+    }
+    setLoading(false);
 
   };
 
   const fetchMoreData = () => {
     if (Pages < totalPages) {
-      setPages(Pages + 1);
+      const newPages = Pages + 1;
+      setPages(newPages);
       setLoading(true);
     }
   };
 
 
-  let Arr = [];
-  const formatData = async (data) => {
-    Object.entries(data).map(([key, value]) => {
-      Arr.push({ title: key, data: value })
-    })
-    console.log('Arr', Arr);
-  }
+  useEffect(() => {
+    fetchTestimonialsData();
+  }, [Pages]);
 
-  const header = () => <Text style={styles.bodyText}>{"Testimonials"}</Text>;
+  const header = () => {
+    return (
+      <View style={styles.section}>
+        <Text style={styles.bodyText}>{"Testimonials"}</Text>
+      </View>
+    )
+  }
+  const renderFooter = () => (
+    <View style={styles.footer}>
+      {loading && <ActivityLoader size={30} text={'Loading more...'} />}
+      {(totalPages === Pages && !loading) && <Text style={styles.footerText}>That's all</Text>}
+    </View>
+  )
+
+  const renderList = ({ item: [category, items], index }) => (
+    <>
+      <View style={[styles.item, index % 2 !== 0 && styles.oddItem]}>
+        <Text style={styles.header}>{category.toUpperCase()}</Text>
+        <Swiper
+          innerContainerStyle={{ height: 350 }}
+          controlsProps={{ prevPos: false, nextPos: false }}
+        >
+          {items.length > 0 && items.map((item, i) => (
+            <Text style={styles.content} key={i}>{item.body}</Text>
+          ))}
+        </Swiper>
+      </View>
+    </>
+  )
+
+
 
   return (
     <>
       <NavBar props={props} />
-
-
-      <Text>hello</Text>
-
-
-
-      {loading && (
-        <View>
-          <ActivityIndicator />
-          <Text style={styles.loaderText}>Loading more data...</Text>
-        </View>
-      )}
-
+      {!testimonialsData?.review == 0 &&
+        <FlatList
+          data={Object.entries(testimonialsData?.review)}
+          ListHeaderComponent={header}
+          ListFooterComponent={renderFooter}
+          renderItem={renderList}
+          onEndReached={fetchMoreData}
+        />
+      }
     </>
   );
 }
 
 const makeStyles = (theme) =>
   StyleSheet.create({
-    body: {
+    section: {
       backgroundColor: "#ffffff",
+      flex: 1
     },
-
     bodyText: {
       fontSize: 20,
       textAlign: "center",
       color: theme.colors.$pink,
       marginTop: 22,
       fontWeight: 400,
-      // marginBottom: 10,
-      backgroundColor: "#fff",
+      backgroundColor: "#ffffff",
       fontFamily: theme.fonts.$serifReg,
     },
     header: {
       textAlign: "center",
       fontSize: 18,
       color: theme.colors.$light_green,
-      paddingTop: 18,
-      paddingBottom: 18,
+      paddingVertical: 18,
       textTransform: "capitalize",
       fontFamily: theme.fonts.$serifReg,
     },
-    contant: {
+    content: {
       color: theme.colors.$text,
       fontFamily: theme.fonts.$sansReg,
       fontSize: 14,
@@ -123,4 +148,14 @@ const makeStyles = (theme) =>
       justifyContent: "center",
       alignItems: "center",
     },
+    footer: {
+      paddingVertical: 8,
+      backgroundColor: theme.colors.$white,
+      alignItems: 'center'
+    },
+    footerText: {
+      fontFamily: theme.fonts.$sansReg,
+      color: theme.colors.$text,
+      fontSize: theme.fonts.$xs,
+    }
   });

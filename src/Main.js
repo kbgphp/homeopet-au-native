@@ -6,8 +6,7 @@ import { useTheme } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { LogoTitle } from './components/elements';
 import { WelcomeScreen, AppSettings, Notifications, WebInView } from "./pages/Public";
-import { resetFirstTime } from './redux/slices/isFirstTimeSlice';
-import { getAppData, resetAppData } from './redux/slices/appDataSlice';
+import { getAppData } from './redux/slices/appDataSlice';
 import {setNotificationPermission} from './redux/slices/notificationSlice';
 import Tabs from "./pages/Tabs";
 import { PermissionsAndroid } from 'react-native';
@@ -20,13 +19,9 @@ export default function Main(props) {
   const dispatch = useDispatch();
   const isFirstTime = useSelector((state) => state.isFirstTime?.value);
 
-
   React.useEffect(() => {
-    // dispatch(resetFirstTime());                          //reset firstTime (Test Purpose only)
-    // dispatch(resetAppData());                            // reset appData (Test Purpose only)
-    dispatch(getAppData()).then((res) => { });              // fetch App Data
+    dispatch(getAppData());              // fetch App Data
   }, []);
-
 
   React.useEffect(() => {
     async function initializeNotification() {

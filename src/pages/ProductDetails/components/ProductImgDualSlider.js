@@ -3,6 +3,9 @@ import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, Image, View, ScrollView, TouchableOpacity } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Swiper from 'react-native-web-swiper';
+import { icons } from '../../../constants';
+
+
 
 export default ({ props, product_gallery, imageClicked }) => {
     const theme = useTheme();
@@ -24,6 +27,12 @@ export default ({ props, product_gallery, imageClicked }) => {
     const goToSlide = async (index) => {
         swiperRef.current.goTo(index);
     };
+
+    const zoomIconClicked = async () => {
+        const index = swiperRef.current.getActiveIndex();
+        imageClicked(index)
+    };
+
     return (
 
         <View
@@ -40,6 +49,9 @@ export default ({ props, product_gallery, imageClicked }) => {
                         </Swiper>
                     }
                 </View>
+                <TouchableOpacity activeOpacity={.8} onPress={() => zoomIconClicked()} style={styles.zoomIconPos}>
+                    <Image source={icons.ZoomIcon} style={styles.zoomIcon} />
+                </TouchableOpacity>
             </View>
             <View style={{ flex: 3, height: 300, paddingTop: 60, }} >
                 <View style={{ height: 175 }}>
@@ -57,7 +69,7 @@ export default ({ props, product_gallery, imageClicked }) => {
                                 swipeAreaStyle={{ height: 165 }}
                                 slideWrapperStyle={{ height: 108, }}
                             >
-                                { product_gallery?.length > 0 && product_gallery.map((item, i) => (
+                                {product_gallery?.length > 0 && product_gallery.map((item, i) => (
                                     <TouchableOpacity key={i} activeOpacity={.8} onPress={() => goToSlide(i)} style={{ justifyContent: 'center', alignItems: 'center' }}>
                                         <Image style={[styles.thumbImg, styles.border]} source={{ uri: item }} />
                                     </TouchableOpacity>
@@ -91,6 +103,19 @@ const makeStyles = (theme) => StyleSheet.create({
         width: 65,
         opacity: 0.9,
         resizeMode: 'contain',
+    },
+    zoomIconPos:{
+        width: 50,
+        height: 50,
+        position: 'absolute',
+        bottom: 0,
+        right: 10,
+        zIndex: 999,
+    },
+    zoomIcon: {
+        width: 50,
+        height: 50,
+        resizeMode:'contain',
     },
     border: {
         borderWidth: 1,

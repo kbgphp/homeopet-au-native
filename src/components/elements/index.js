@@ -7,3 +7,4 @@ export { default as LogoTitle } from "./LogoTitle";
 export { default as ActivityLoader } from "./ActivityLoader";
 export { default as NoDataFound } from "./NoDataFound";
 export { default as SkeletonLoader } from "./SkeletonLoader";
+export { default as BlogImage } from "./BlogImage";

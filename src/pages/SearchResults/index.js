@@ -81,7 +81,6 @@ export default function SearchResults(props) {
                         fetchMoreData()
                     }}
                     style={{ backgroundColor: theme.colors.$white }}
-
                 />
             }
             <QuickSearch props={props} />

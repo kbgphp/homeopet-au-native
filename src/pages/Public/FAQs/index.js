@@ -1,41 +1,20 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  Image,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  ActivityIndicator,
-  FlatList,
-} from "react-native";
-
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, } from "react-native";
 import { useTheme } from "react-native-paper";
+import { useSelector } from 'react-redux';
+import Icon from "react-native-vector-icons/FontAwesome";
 
+import { ActivityLoader } from "../../../components/elements";
 import { NavBar } from "../../../components/global";
 
-import { List, MD3Colors } from "react-native-paper";
-import Icon from "react-native-vector-icons/FontAwesome";
-import axios from "axios";
-import { ActivityLoader } from "../../../components/elements";
-import { _REST } from "../../../services";
 
 export default function FAQs(props) {
   const theme = useTheme();
   const styles = makeStyles(theme);
-
   const [expanded, setExpanded] = React.useState(false);
   const [expandedItems, setExpandedItems] = React.useState([]);
-  const [feqdata, setfeqData] = React.useState([]);
+  const FAQs = useSelector((state) => state.appData.BIG_DATA.faqs);
 
-  React.useEffect(() => {
-    fetchFaqData();
-  }, []);
-
-  const fetchFaqData = async () => {
-    const res = await _REST.CUSTOM_POST("pages", { page: "faq" });
-    if (res?.data) setfeqData(res?.data);
-  };
 
   const toggleItem = (i) => {
     if (expandedItems.includes(i)) {
@@ -43,7 +22,6 @@ export default function FAQs(props) {
     } else {
       setExpandedItems([...expandedItems, i]);
     }
-    //  LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setExpanded(!expanded);
   };
 
@@ -51,8 +29,8 @@ export default function FAQs(props) {
     const expanded = expandedItems.includes(index);
 
     return (
-      <View style={styles.body}>
-        <View style={styles.innerbody}>
+      <View style={styles.section}>
+        <View style={styles.container}>
           <View key={index}>
             <View>
               <TouchableOpacity
@@ -60,15 +38,8 @@ export default function FAQs(props) {
                 onPress={() => toggleItem(index)}
                 activeOpacity={0.9}
               >
-                <Icon
-                  name={expanded ? "chevron-up" : "chevron-down"}
-                  size={16}
-                  color="#bbb"
-                />
-
-                <Text style={[styles.inneracc, expanded && styles.ques]}>
-                  {item.ques}
-                </Text>
+                <Icon name={expanded ? "chevron-up" : "chevron-down"} size={16} color="#bbb" />
+                <Text style={[styles.header, expanded && styles.ques]}>{item.ques}</Text>
               </TouchableOpacity>
             </View>
 
@@ -77,7 +48,7 @@ export default function FAQs(props) {
                 <Text style={styles.listitem}>{item.ans}</Text>
               </View>
             )}
-            <View style={styles.devider} />
+            <View style={styles.divider} />
           </View>
         </View>
       </View>
@@ -85,19 +56,14 @@ export default function FAQs(props) {
   };
 
   const header = () => (
-    <View style={styles.body}>
+    <View style={styles.section}>
       <Text style={styles.bodyText}>{"FAQs"}</Text>
-
-      <View style={styles.innerbody}>
+      <View style={styles.container}>
         <View>
-          <Text style={styles.heading}>
-            We have compiled an FAQ to help answer some of the more common
-            questions asked about HomeoPet.
-          </Text>
+          <Text style={styles.heading}> We have compiled an FAQ to help answer some of the more common questions asked about HomeoPet.</Text>
         </View>
-
         <View>
-          <Text style={styles.contant}>
+          <Text style={styles.content}>
             If for any reason you don't find what you're looking for, please
             feel free to contact us or drop us an email with your questions. One
             of our customer support staff will do their very best to address
@@ -113,12 +79,12 @@ export default function FAQs(props) {
   return (
     <>
       <NavBar props={props} />
-
-      {feqdata?.faq && feqdata?.faq?.length > 0 ? (
+      {FAQs?.faq && FAQs?.faq?.length > 0 ? (
         <FlatList
-          data={feqdata?.faq}
+          data={FAQs?.faq}
           renderItem={renderItem}
           ListHeaderComponent={header}
+          style={{backgroundColor:'#ffffff'}}
         />
       ) : (
         <ActivityLoader />
@@ -129,47 +95,44 @@ export default function FAQs(props) {
 
 const makeStyles = (theme) =>
   StyleSheet.create({
-    body: {
-      backgroundColor: "#ffff",
+    section: {
+      backgroundColor: "#ffffff",
     },
-    innerbody: {
+    container: {
       marginHorizontal: 20,
-      backgroundColor: "#ffff",
+      backgroundColor: "#ffffff",
     },
     bodyText: {
-      fontSize: 20,
+      fontSize: theme.fonts.$font_xl,
       textAlign: "center",
       color: theme.colors.$pink,
-      fontFamily: theme.fonts.$serifReg,
-      marginBottom: 10,
-      marginTop: 10,
+      fontFamily: theme.fonts.$sansReg,
+      marginVertical:10
     },
     heading: {
       color: theme.colors.$light_green,
-      fontFamily: theme.fonts.$serifReg,
-      fontSize: 18,
+      fontFamily: theme.fonts.$sansReg,
+      fontSize: theme.fonts.$font_md,
       paddingRight: 20,
     },
-    contant: {
-      marginBottom: 15,
-      marginTop: 15,
+    content: {
+      marginVertical:16,
       color: theme.colors.$text,
       fontFamily: theme.fonts.$sansReg,
-      fontSize: 14,
+      fontSize: theme.fonts.$font_sm,
     },
     Accordion: {
-      marginTop: 5,
-      marginBottom: 5,
+      marginVertical:5
     },
 
-    inneracc: {
-      fontSize: 12,
-      color: "#666",
+    header: {
+      fontSize: theme.fonts.$font_xs,
+      color: theme.colors.$text,
       marginLeft: 10,
     },
     listitem: {
-      fontSize: 12,
-      color: "#666",
+      fontSize: theme.fonts.$font_xs,
+      color: theme.colors.$text,
       marginHorizontal: 26,
       marginVertical: 10,
     },
@@ -177,12 +140,11 @@ const makeStyles = (theme) =>
       justifyContent: "flex-start",
       flexDirection: "row",
     },
-    devider: {
-      height: 1,
-      backgroundColor: "#ccc",
+    divider: {
+      height: 1.5,
+      backgroundColor:  theme.colors.$border,
+      marginVertical: 5
 
-      marginTop: 5,
-      marginBottom: 5,
     },
     loader: {
       flex: 1,
@@ -192,5 +154,6 @@ const makeStyles = (theme) =>
     },
     ques: {
       color: theme.colors.$light_green,
+      fontFamily: theme.fonts.$sansBold,
     },
   });

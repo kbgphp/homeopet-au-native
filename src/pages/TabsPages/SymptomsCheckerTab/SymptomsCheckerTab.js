@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { NavBar, ProductListItem, Disclaimer, ProblemAreaKey } from "../../../components/global"
-import { PinkHeaderWithBird, ActivityLoader } from "../../../components/elements"
+import { PinkHeaderWithBird, ActivityLoader, NoDataFound } from "../../../components/elements"
 import Canine from "./components/Canine"
 import Feline from "./components/Feline"
 import Equine from "./components/Equine"
@@ -36,8 +36,12 @@ export default function SymptomsCheckerTab(props) {
                 setAreaExpanded(false); setIsSymptomsLoading(true);
                 const pet = selectedPet === 'canine' ? 'Dog' : selectedPet === 'feline' ? 'Cat' : 'Horse';
                 const res = await _REST.CUSTOM_POST("symptoms", { identifier: symptomPoint });
-                setSymptomsList([...symptomsList, ...res?.data]);
-                setSymptomTypeName(res?.type);
+                console.log('res: ', res.data);
+                setSymptomsList(res?.data);
+                setSymptomTypeName(symptomPoint.replace(/_/g, ' ').split(" ").slice(1).join(" "));
+
+                console.log(symptomPoint.replace(/_/g, ' ').split(" ").slice(1).join(" "));
+
                 setIsSymptomsDataLoaded(true)
                 setIsSymptomsLoading(false);
                 scrollRef.current?.scrollTo({ y: 600, animated: true });
@@ -51,13 +55,14 @@ export default function SymptomsCheckerTab(props) {
     const [scrollYPosition, setScrollYPosition] = React.useState(0);
 
     const fetchCausesAndProducts = async (symptom_id) => {
+        console.log('symptom_id: ', symptom_id);
         setIsSymptomsLoading(true);
-        // const res = await _REST.CUSTOM_POST("cause", { symptom_id });
-        // setCausesList([...causesList, ...res?.data?.causes]);
-        // setProductsList([...productsList, ...res?.data?.medicines]);
+        const res = await _REST.CUSTOM_POST("cause", { symptom_id, origin: 'au' });
+        setCausesList(res?.data?.causes);
+        setProductsList(res?.data?.medicines);
         setIsCauseAndMedLoaded(true);
         setIsSymptomsLoading(false);
-        // scrollRef.current?.scrollTo({ y: 800, animated: true });
+        scrollRef.current?.scrollTo({ y: 800, animated: true });
 
     };
 
@@ -91,20 +96,20 @@ export default function SymptomsCheckerTab(props) {
                                 <Text style={styles.symptomType}>{symptomTypeName}</Text>
                                 <Text style={styles.subHeader}>Select Symptom</Text>
                                 {symptomsList.map((item, i) => (
-                                    <View key={i} style={styles.boxStyle} >
-                                        <TouchableOpacity key={i} activeOpacity={.8} onPress={() => { setSymptomIndex(i); fetchCausesAndProducts(item?.id) }} >
-                                            <Text style={[styles.symptomText, symptomIndex === i ? styles.selectedSymptom : '']}>{item?.symptom}</Text>
-                                        </TouchableOpacity>
-                                    </View>
+
+                                    <TouchableOpacity key={i} activeOpacity={.8} onPress={() => { setSymptomIndex(i); fetchCausesAndProducts(item?.id) }} >
+                                        <Text style={[styles.symptomText, symptomIndex === i ? styles.selectedSymptom : '']}>{item?.symptom}</Text>
+                                    </TouchableOpacity>
+
                                 ))}
                             </View>
                         ) : (
-                            <Text style={styles.noData}>No data found</Text>
+                            <NoDataFound text={'No data found'} />
                         )}
                     </View>
                 )}
 
-                {(symptomIndex && isCauseAndMedLoaded) && (
+                {/* {(symptomIndex && isCauseAndMedLoaded) && (
                     <View>
                         {(causesList && causesList?.length > 0) &&
                             <View style={styles.possibleCauses}>
@@ -117,7 +122,7 @@ export default function SymptomsCheckerTab(props) {
                             </View>
                         }
 
-                        {(productsList && productsList?.length > 0) &&
+                        {(productsList && productsList?.length > 0) ?
                             <View style={styles.recommendedMedicines}>
                                 <Text style={[styles.subHeader, { paddingHorizontal: 20 }]}>Recommended {(productsList?.length > 1 ? 'Medicines' : 'Medicine')}</Text>
                                 {productsList.map((item, i) => (
@@ -126,9 +131,11 @@ export default function SymptomsCheckerTab(props) {
                                     </View>
                                 ))}
                             </View>
+                            :
+                            <NoDataFound text={'No data found'} />
                         }
                     </View>
-                )}
+                )} */}
             </ScrollView>
 
             <ProblemAreaKey areaExpanded={areaExpanded} setAreaExpanded={setAreaExpanded} />
@@ -147,7 +154,7 @@ const makeStyles = (theme) => StyleSheet.create({
         fontSize: theme.fonts.$font_md,
         color: theme.colors.$light_green,
         fontFamily: theme.fonts.$serifReg,
-        marginBottom: 4,
+        marginVertical: 4,
         textTransform: 'capitalize'
     },
     subHeader: {
@@ -162,15 +169,12 @@ const makeStyles = (theme) => StyleSheet.create({
         fontFamily: theme.fonts.$sansReg,
         marginBottom: 6
     },
+    boxStyle: {
+
+    },
     selectedSymptom: {
         textDecorationLine: 'underline',
         color: theme.colors.$light_green,
-    },
-    noData: {
-        fontSize: theme.fonts.$font_sm,
-        color: theme.colors.$pink,
-        fontFamily: theme.fonts.$sansReg,
-        marginBottom: 12
     },
     possibleCauses: {
         paddingHorizontal: 20,
@@ -181,6 +185,6 @@ const makeStyles = (theme) => StyleSheet.create({
         borderStyle: 'solid'
     },
     recommendedMedicines: {
-
+        paddingTop: 18
     }
 });

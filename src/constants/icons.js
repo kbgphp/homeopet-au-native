@@ -21,9 +21,12 @@ export const Worms_Over =  require("../assets/icons/png/Worms_Over.png");
 export const Back =  require("../assets/icons/png/Back.png");
 export const Back_Over =  require("../assets/icons/png/Back_Over.png");
 
+export const Three60Deg =  require("../assets/icons/png/360deg.png");
+export const ZoomIcon =  require("../assets/icons/png/zoom_icon.png");
 
 
 export default{
     Anxiety,Anxiety_Over,Dental,Dental_Over,Injuries,Injuries_Over,LegJoint,LegJoint_Over,Respiratory,
-    Respiratory_Over,SkinCoat,SkinCoat_Over,Stomach,Stomach_Over,Worms,Worms_Over,Back,Back_Over
+    Respiratory_Over,SkinCoat,SkinCoat_Over,Stomach,Stomach_Over,Worms,Worms_Over,Back,Back_Over,Three60Deg,
+    ZoomIcon
 }

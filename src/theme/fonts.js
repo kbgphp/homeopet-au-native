@@ -18,7 +18,7 @@ export const FONTS = {
     $font_std: 16,
     $font_md: 18,
     $font_lg: 20,
-    $font_xl: 20,
+    $font_xl: 22,
     $font_xxl: 24,
 
     // custom css variables

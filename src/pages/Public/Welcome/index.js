@@ -21,10 +21,10 @@ export default function WelcomeScreen(props) {
         swiperRef.current.goTo(num);
     }
 
-    const BIG_DATA = useSelector((state) => state.appData?.BIG_DATA);
+    const { BIG_DATA } = useSelector((state) => state.appData);
 
     const goToHome = () => {
-        if (!!BIG_DATA?.home) {
+        if (BIG_DATA?.home) {
             dispatch(appOpened());                  // User Completed First Open
             props?.navigation?.replace('Tabs');
         } else {
@@ -98,7 +98,7 @@ export default function WelcomeScreen(props) {
                         </View>
                     </View>
                     <View style={{ flex: 5, alignItems: 'center', justifyContent: 'center' }} >
-                        <TouchableOpacity activeOpacity={0.8} onPress={() => goToHome()} style={styles.nextPage}>
+                        <TouchableOpacity activeOpacity={0.8} onPress={goToHome} style={styles.nextPage}>
                             <Image style={styles.pawImg} source={images?.pawPrint} />
                             <Text style={styles.pinkText}>{"Continue to App"}</Text>
                         </TouchableOpacity>

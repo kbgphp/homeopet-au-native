@@ -24,10 +24,10 @@ export default function SearchTab(props) {
         setTimeout(() => {
             setIsProcessing(false); setSelectedIndex('');
         }, 3000);
-        // dispatch(fetchProducts(symptom_id)).then((res) => {
-        //     setIsProcessing(false); setSelectedIndex('');
-        //     props.navigation.navigate('RecommendedProducts');
-        // })
+        dispatch(fetchProducts(symptom_id)).then((res) => {
+            setIsProcessing(false); setSelectedIndex('');
+            props.navigation.navigate('RecommendedProducts');
+        })
     };
 
 

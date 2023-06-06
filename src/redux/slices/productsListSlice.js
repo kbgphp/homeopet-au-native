@@ -45,7 +45,7 @@ export const productsSliceSelector = (state) => state;
 export const fetchProducts = (symptom_id) => async dispatch => {
   try {
     dispatch(productsFetchStart());
-    const res = await _REST.CUSTOM_POST("symptom-products", { symptom_id });
+    const res = await _REST.CUSTOM_POST("symptom-products", { symptom_id, origin : "au" });
     dispatch(res?.data ? productsFetchSuccess(res?.data?.medicines) : productsFetchError())
     return res.data
   } catch (e) {

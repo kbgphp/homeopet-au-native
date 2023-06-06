@@ -1,107 +1,62 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  Image,
-  View,
-  
-  ScrollView,
-  
-} from "react-native";
-
+import { StyleSheet, Text, Image, View, ScrollView, } from "react-native";
+import { useWindowDimensions } from 'react-native';
 import { useTheme } from "react-native-paper";
 import { NavBar } from "../../../components/global";
-import { ActivityLoader } from "../../../components/elements";
-import { _REST } from "../../../services";
-
+import RenderHtml from 'react-native-render-html';
+import { useSelector } from 'react-redux';
 
 export default function About(props) {
   const theme = useTheme();
   const styles = makeStyles(theme);
-  const [aboutusdata, aboutUsData] = React.useState([]);
-  
-
-  React.useEffect(() => {
-    fetchBlogData();
-  }, []);
-
-  const fetchBlogData = async () => {
-    const res = await _REST.CUSTOM_POST("pages", {
-      page: "about",
-    });
-
-    if (res?.data) aboutUsData(res);
-   
-   
-  };
-
-  
+  const { width } = useWindowDimensions();
+  const ABOUT = useSelector((state) => state.appData.BIG_DATA.about);
+  const source = { html: `${ABOUT[0]?.content}` };
   return (
     <>
       <NavBar props={props} />
+      <ScrollView style={styles.section}>
+        <Image source={{ uri: ABOUT[0]?.banner_url, }} style={{ width: "100%", height: 180 }} />
 
-      {aboutusdata?.data && aboutusdata?.data?.length > 0 ? (
-        <ScrollView style={styles.body}>
-          <Image
-            source={{
-              uri: aboutusdata?.data[0].banner_url,
-            }}
-            style={{ width: "100%", height: 170 }}
-          />
-
-          <View style={styles.innerbody}>
-            <Text style={styles.bodyText}>{"About Us"}</Text>
-            <View>
-              <Text style={styles.heading}>
-                HomeoPet LLC is a US Owned family business , with its originis
-                rooted deep in the wilds of the South West of ireland.
-              </Text>
-            </View>
-
-            <View>
-              <Text style={styles.contant}>{aboutusdata?.data[0].content}</Text>
-            </View>
+        <View style={styles.container}>
+          <Text style={styles.header}>{"About Us"}</Text>
+          <View>
+            <Text style={styles.headerDesc}>
+              HomeoPet LLC is a AU Owned family business , with its origins
+              rooted deep in the wilds of the South West of ireland.
+            </Text>
           </View>
-        </ScrollView>
-      ) : (
-        <ActivityLoader />
-      )}
+
+          <View>
+            <RenderHtml contentWidth={width} source={source} />
+          </View>
+        </View>
+      </ScrollView>
+
     </>
   );
 }
 
 const makeStyles = (theme) =>
   StyleSheet.create({
-    body: {
+    section: {
       backgroundColor: "#fff",
     },
-    innerbody: {
+    container: {
       margin: 20,
     },
-    bodyText: {
+    header: {
       fontSize: 20,
       textAlign: "center",
       color: theme.colors.$pink,
-      marginTop: 12,
-      marginBottom: 10,
+      marginVertical: 8,
       fontFamily: theme.fonts.$serifReg,
     },
-    heading: {
+    headerDesc: {
       fontFamily: theme.fonts.$serifReg,
       fontSize: 17,
       marginTop: 5,
       color: theme.colors.$light_green,
-    },
-    contant: {
-      marginTop: 10,
-      marginBottom: 10,
-      fontSize: 14,
-      color: theme.colors.$text,
-      fontWeight: 400,
-      fontFamily: theme.fonts.$sansReg,
-    },
-    miniheading: {
-      fontWeight: 600,
-      color: theme.colors.$text,
-    },
+    }
+
   });
