@@ -18,7 +18,7 @@ export default () => {
         <SelectDropdown
             data={languages}
             defaultValue={{ title: 'English (US)', value: 'eng_us' }}
-            onSelect={(selectedItem, index) => { console.log(selectedItem, index); }}
+            onSelect={(selectedItem, index) => {  }}
             defaultButtonText={'Select language'}
             buttonTextAfterSelection={(selectedItem, index) => { return selectedItem.title; }}
             rowTextForSelection={(item, index) => { return item.title; }}

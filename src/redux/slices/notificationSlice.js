@@ -60,9 +60,6 @@ export default notificationSlice.reducer;
 
 
 export const setCompetitionSetting = (val) => async dispatch => {
-  console.log('val: ', val);
-
-
   if (val) {
     messaging()
       .subscribeToTopic('competitions')

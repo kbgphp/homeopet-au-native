@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { LogoTitle } from './components/elements';
 import { WelcomeScreen, AppSettings, Notifications, WebInView } from "./pages/Public";
 import { getAppData } from './redux/slices/appDataSlice';
-import {setNotificationPermission} from './redux/slices/notificationSlice';
+import { setNotificationPermission } from './redux/slices/notificationSlice';
 import Tabs from "./pages/Tabs";
 import { PermissionsAndroid } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
@@ -34,11 +34,8 @@ export default function Main(props) {
         const enabled = authStatus === messaging.AuthorizationStatus.AUTHORIZED || authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
         if (enabled) {
-          console.log('enabled: ', enabled);
-          console.log('Authorization status:', authStatus);
-            dispatch(setNotificationPermission(enabled)); 
+          dispatch(setNotificationPermission(enabled));
           await messaging().registerDeviceForRemoteMessages();
-
           const token = await messaging().getToken();
           console.log('token: ', token);
         }

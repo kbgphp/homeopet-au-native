@@ -20,7 +20,6 @@ export default function AppSetting(props) {
     const [sliderValue, setSliderValue] = useState(6);
     const APP_DATA = useSelector((state) => state.appData?.BIG_DATA?.home);
     const NOTIFICATION = useSelector((state) => state?.notification);
-    console.log('NOTIFICATION: ', NOTIFICATION);
 
     const goTo = async (url, title) => {
         props?.navigation?.navigate('WebInView', { url: url, title: title });

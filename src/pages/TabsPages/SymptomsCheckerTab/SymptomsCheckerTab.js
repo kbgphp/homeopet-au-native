@@ -24,7 +24,6 @@ export default function SymptomsCheckerTab(props) {
     const [symptomsList, setSymptomsList] = React.useState([]);
     const [symptomTypeName, setSymptomTypeName] = React.useState('');
 
-
     const [causesList, setCausesList] = React.useState([]);
     const [productsList, setProductsList] = React.useState([]);
     const [isCauseAndMedLoaded, setIsCauseAndMedLoaded] = React.useState(false);
@@ -36,12 +35,8 @@ export default function SymptomsCheckerTab(props) {
                 setAreaExpanded(false); setIsSymptomsLoading(true);
                 const pet = selectedPet === 'canine' ? 'Dog' : selectedPet === 'feline' ? 'Cat' : 'Horse';
                 const res = await _REST.CUSTOM_POST("symptoms", { identifier: symptomPoint });
-                console.log('res: ', res.data);
                 setSymptomsList(res?.data);
                 setSymptomTypeName(symptomPoint.replace(/_/g, ' ').split(" ").slice(1).join(" "));
-
-                console.log(symptomPoint.replace(/_/g, ' ').split(" ").slice(1).join(" "));
-
                 setIsSymptomsDataLoaded(true)
                 setIsSymptomsLoading(false);
                 scrollRef.current?.scrollTo({ y: 600, animated: true });
@@ -52,10 +47,7 @@ export default function SymptomsCheckerTab(props) {
 
     const scrollRef = React.useRef();
 
-    const [scrollYPosition, setScrollYPosition] = React.useState(0);
-
     const fetchCausesAndProducts = async (symptom_id) => {
-        console.log('symptom_id: ', symptom_id);
         setIsSymptomsLoading(true);
         const res = await _REST.CUSTOM_POST("cause", { symptom_id, origin: 'au' });
         setCausesList(res?.data?.causes);
@@ -63,7 +55,6 @@ export default function SymptomsCheckerTab(props) {
         setIsCauseAndMedLoaded(true);
         setIsSymptomsLoading(false);
         scrollRef.current?.scrollTo({ y: 800, animated: true });
-
     };
 
 
@@ -89,14 +80,13 @@ export default function SymptomsCheckerTab(props) {
                 {selectedPet === 'feline' && <Feline symptomPoint={symptomPoint} setSymptomPoint={setSymptomPoint} />}
                 {selectedPet === 'equine' && <Equine symptomPoint={symptomPoint} setSymptomPoint={setSymptomPoint} />}
 
-                {(symptomPoint && isSymptomsDataLoaded) && (
+                {(symptomPoint && isSymptomsDataLoaded) ? (
                     <View style={{ paddingHorizontal: 20 }} >
                         {!!symptomsList && !!symptomsList.length > 0 ? (
                             <View>
                                 <Text style={styles.symptomType}>{symptomTypeName}</Text>
                                 <Text style={styles.subHeader}>Select Symptom</Text>
                                 {symptomsList.map((item, i) => (
-
                                     <TouchableOpacity key={i} activeOpacity={.8} onPress={() => { setSymptomIndex(i); fetchCausesAndProducts(item?.id) }} >
                                         <Text style={[styles.symptomText, symptomIndex === i ? styles.selectedSymptom : '']}>{item?.symptom}</Text>
                                     </TouchableOpacity>
@@ -107,11 +97,12 @@ export default function SymptomsCheckerTab(props) {
                             <NoDataFound text={'No data found'} />
                         )}
                     </View>
-                )}
+                ) : null}
 
-                {/* {(symptomIndex && isCauseAndMedLoaded) && (
+
+                {(symptomIndex >= 0 && isCauseAndMedLoaded) ? (
                     <View>
-                        {(causesList && causesList?.length > 0) &&
+                        {(causesList && causesList?.length > 0) ?
                             <View style={styles.possibleCauses}>
                                 <Text style={styles.subHeader}>Possible Causes</Text>
                                 {causesList?.map((item, i) => (
@@ -119,7 +110,7 @@ export default function SymptomsCheckerTab(props) {
                                         <Text style={[styles.symptomText, { marginBottom: 2 }]}>{i + 1}.{" "}{item?.value}</Text>
                                     </View>
                                 ))}
-                            </View>
+                            </View> : null
                         }
 
                         {(productsList && productsList?.length > 0) ?
@@ -132,10 +123,12 @@ export default function SymptomsCheckerTab(props) {
                                 ))}
                             </View>
                             :
-                            <NoDataFound text={'No data found'} />
+                            <NoDataFound text={'No product found'} />
                         }
                     </View>
-                )} */}
+                ) : null}
+
+
             </ScrollView>
 
             <ProblemAreaKey areaExpanded={areaExpanded} setAreaExpanded={setAreaExpanded} />

@@ -12,7 +12,7 @@ export default () => {
         <SelectDropdown
             data={countries}
             defaultValue={'USA'}
-            onSelect={(selectedItem, index) => { console.log(selectedItem, index); }}
+            onSelect={(selectedItem, index) => { }}
             defaultButtonText={'Select country'}
             buttonTextAfterSelection={(selectedItem, index) => { return selectedItem; }}
             rowTextForSelection={(item, index) => { return item; }}
