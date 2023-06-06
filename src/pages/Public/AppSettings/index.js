@@ -35,7 +35,7 @@ export default function AppSetting(props) {
     }
 
     const toggleCompetition = () => dispatch(setCompetitionSetting(!NOTIFICATION?.competitionNotificationOn));
-    const toggleSeasonalAndNew = () => dispatch(setNewAndSeasonalProductSetting(!NOTIFICATION?.newProductNotificationOn));
+    const toggleSeasonalAndNew = () => dispatch(setNewAndSeasonalProductSetting(!NOTIFICATION?.newAndSeasonalProductNotificationOn));
     const toggleBlog = () => dispatch(setBlogSetting(!NOTIFICATION?.blogNotificationOn));
 
     const sliderValueChanged = ({ value }) => {
@@ -52,7 +52,7 @@ export default function AppSetting(props) {
                 <View>
                     <View style={styles.header}>
                         <Text style={styles.pinkText}>{"Settings"}</Text>
-                        <TouchableOpacity activeOpacity={0.8} style={styles.button} >
+                        <TouchableOpacity activeOpacity={0.8} style={styles.button}  onPress={() =>props.navigation.goBack()} >
                             <Text style={styles.pinkText}>{"Done"}</Text>
                         </TouchableOpacity>
                     </View>
@@ -76,7 +76,7 @@ export default function AppSetting(props) {
                     </View>
                     <View style={[styles.listItem, styles.bottomBorder]}>
                         <Text style={styles.bodyText}>{"Seasonal & New Products"}</Text>
-                        <Switch value={NOTIFICATION?.newProductNotificationOn} disabled={false} toggleSwitch={toggleSeasonalAndNew} />
+                        <Switch value={NOTIFICATION?.newAndSeasonalProductNotificationOn} disabled={false} toggleSwitch={toggleSeasonalAndNew} />
                     </View>
                     <View style={[styles.listItem, styles.bottomBorder]}>
                         <Text style={styles.bodyText}>{"Latest from the HomeoPet Blog"}</Text>

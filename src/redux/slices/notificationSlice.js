@@ -20,7 +20,7 @@ export const notificationSlice = createSlice({
     toggleCompetitionON: (state, action) => {
       state.competitionNotificationOn = action.payload
     },
-    toggleNewProductON: (state, action) => {
+    toggleNewAndSeasonalProductON: (state, action) => {
       state.newAndSeasonalProductNotificationOn = action.payload
     },
     toggleBlogON: (state, action) => {
@@ -80,7 +80,7 @@ export const setCompetitionSetting = (val) => async dispatch => {
 export const setNewAndSeasonalProductSetting = (val) => async dispatch => {
   try {
     (val) ? messaging().subscribeToTopic('seasonal_and_new') : messaging().unsubscribeFromTopic('seasonal_and_new')
-    dispatch(toggleNewProductON(val));
+    dispatch(toggleNewAndSeasonalProductON(val));
   } catch (e) { }
 }
 
