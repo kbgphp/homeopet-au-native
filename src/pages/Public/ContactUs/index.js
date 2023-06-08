@@ -71,10 +71,10 @@ export default function ContactUs(props) {
       >
 
         <View style={styles.innerSection}>
-          <Text style={styles.bodyText}>{"Contact Us"}</Text>
+          <Text style={styles.pageTitle}>{"Contact Us"}</Text>
           <View>
             <View>
-              <Text style={styles.headerText}>
+              <Text style={styles.pageDesc}>
                 Our <Text style={styles.link}><Link to={{ screen: 'FAQs' }}> FAQ page </Link></Text>
                 provides answers TOAST some of the more common question about our products.However,if you
                 haven't found the answer to your question or for any other
@@ -232,16 +232,15 @@ const makeStyles = (theme) =>
       marginLeft: 20,
       marginRight: 20,
     },
-    bodyText: {
+    pageTitle: {
+      marginTop: 14,
+      marginBottom: 12,
       fontSize: theme.fonts.$font_xl,
       textAlign: "center",
       color: theme.colors.$pink,
-      marginTop: 22,
-      marginBottom: 10,
-      fontWeight: 400,
       fontFamily: theme.fonts.$serifReg,
     },
-    headerText: {
+    pageDesc: {
       fontSize: theme.fonts.$font_std,
       color: theme.colors.$light_green,
       paddingBottom: 22,

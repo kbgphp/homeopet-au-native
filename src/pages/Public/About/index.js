@@ -19,9 +19,9 @@ export default function About(props) {
         <Image source={{ uri: ABOUT[0]?.banner_url, }} style={{ width: "100%", height: 180 }} />
 
         <View style={styles.container}>
-          <Text style={styles.header}>{"About Us"}</Text>
+          <Text style={styles.pageTitle}>{"About Us"}</Text>
           <View>
-            <Text style={styles.headerDesc}>
+            <Text style={styles.pageDesc}>
               HomeoPet LLC is a AU Owned family business , with its origins
               rooted deep in the wilds of the South West of ireland.
             </Text>
@@ -45,14 +45,15 @@ const makeStyles = (theme) =>
     container: {
       margin: 20,
     },
-    header: {
-      fontSize: 20,
+    pageTitle: {
+      marginTop: 14,
+      marginBottom: 12,
+      fontSize: theme.fonts.$font_xl,
       textAlign: "center",
       color: theme.colors.$pink,
-      marginVertical: 8,
       fontFamily: theme.fonts.$serifReg,
     },
-    headerDesc: {
+    pageDesc: {
       fontFamily: theme.fonts.$serifReg,
       fontSize: 17,
       marginTop: 5,

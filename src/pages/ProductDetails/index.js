@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
-import { StyleSheet, Text, Image,Linking, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, Image, Linking, View, ScrollView, KeyboardAvoidingView,Platform, TouchableOpacity } from 'react-native';
 import { BackTextButton, ProductListItem, QuickSearch } from "../../components/global";
 
 
@@ -45,45 +45,49 @@ export default function ProductDetails(props) {
     };
 
 
-   
-
     const imageClicked = async (i) => {
-        props.navigation.navigate('ProductImagesSlider',{imgIndex:i});
+        props.navigation.navigate('ProductImagesSlider', { imgIndex: i });
     }
 
-
-
     return (
-        <>
+
+        <View style={{ flex: 1 }}>
             <BackTextButton props={props} />
-            {isProcessing && <ActivityLoader />}
-            {(!isProcessing && dataLoaded) &&
-                <ScrollView style={styles.scrollView}
-                    showsVerticalScrollIndicator={false}
-                    nestedScrollEnabled={true}
-                >
-                    <View style={{ backgroundColor: 'white', paddingHorizontal: 20 }}>
-                        <Text style={styles.productName}>{PRODUCT?.title}</Text>
-                        <Text style={styles.productDesc}>{PRODUCT?.body_html}</Text>
-                    </View>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                style={{ flex: 1 }}
+                keyboardVerticalOffset={Platform.OS === 'ios' ? 70 : 140}
+            >
+                {isProcessing ? <ActivityLoader /> : null}
+                {(!isProcessing && dataLoaded) ?
+                    <ScrollView style={styles.scrollView}
+                        showsVerticalScrollIndicator={false}
+                        nestedScrollEnabled={true}
+                    >
+                        <View style={{ backgroundColor: 'white', paddingHorizontal: 20 }}>
+                            <Text style={styles.productName}>{PRODUCT?.title}</Text>
+                            <Text style={styles.productDesc}>{PRODUCT?.body_html}</Text>
+                        </View>
 
-                    <ProductImgDualSlider props={props} product_gallery={PRODUCT?.product_gallery} imageClicked={imageClicked} />
+                        <ProductImgDualSlider props={props} product_gallery={PRODUCT?.product_gallery} imageClicked={imageClicked} />
 
-                    <View style={{ flexDirection: 'row', paddingHorizontal: 14, marginTop: 12, marginBottom: 18 }}>
-                        <PinkButton text={'Shop Online'} goTo={() => goTo('Online')} />
-                        <PinkButton text={'Shop Instore'} goTo={() => goTo('Instore')} />
-                    </View>
+                        <View style={{ flexDirection: 'row', paddingHorizontal: 14, marginTop: 12, marginBottom: 18 }}>
+                            <PinkButton text={'Shop Online'} goTo={() => goTo('Online')} />
+                            <PinkButton text={'Shop Instore'} goTo={() => goTo('Instore')} />
+                        </View>
 
-                    <SegmentSelector selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-                    <View style={{ marginTop: 12, marginBottom: 18 }}>
-                        {selectedTab === 'Symptoms' && <ListData data={PRODUCT?.symptoms} />}
-                        {selectedTab === 'Benefits' && <ListData data={PRODUCT?.benefits} />}
-                        {selectedTab === 'Reviews' && <ReviewList data={PRODUCT?.review} />}
-                    </View>
-                </ScrollView>
-            }
-            <QuickSearch props={props} />
-        </>
+                        <SegmentSelector selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+                        <View style={{ marginTop: 12, marginBottom: 18 }}>
+                            {selectedTab === 'Symptoms' && <ListData data={PRODUCT?.symptoms} />}
+                            {selectedTab === 'Benefits' && <ListData data={PRODUCT?.benefits} />}
+                            {selectedTab === 'Reviews' && <ReviewList data={PRODUCT?.review} />}
+                        </View>
+                    </ScrollView> : null
+                }
+
+                <QuickSearch props={props} />
+            </KeyboardAvoidingView>
+        </View>
     );
 }
 

@@ -114,7 +114,7 @@ export default function SymptomsCheckerTab(props) {
                         }
 
                         {(productsList && productsList?.length > 0) ?
-                            <View style={styles.recommendedMedicines}>
+                            <View style={styles.recommendedFormulas}>
                                 <Text style={[styles.subHeader, { paddingHorizontal: 20 }]}>Recommended {(productsList?.length > 1 ? 'Medicines' : 'Medicine')}</Text>
                                 {productsList.map((item, i) => (
                                     <View key={i}>
@@ -177,7 +177,7 @@ const makeStyles = (theme) => StyleSheet.create({
         borderColor: theme.colors.$border,
         borderStyle: 'solid'
     },
-    recommendedMedicines: {
+    recommendedFormulas: {
         paddingTop: 18
     }
 });

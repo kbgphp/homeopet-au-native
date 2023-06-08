@@ -4,6 +4,7 @@ import { useTheme } from 'react-native-paper';
 import { BlogImage } from '../../../../components/elements';
 
 export default function BlogCard({ props, data }) {
+
     const theme = useTheme();
     const styles = makeStyles(theme);
     const handleBlogDetails = (id) => {

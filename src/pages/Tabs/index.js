@@ -15,7 +15,7 @@ export default function Tabs(props) {
     const theme = useTheme();
     return (
 
-        <Tab.Navigator initialRouteName="Home"
+        <Tab.Navigator initialRouteName="Products"
             activeColor={theme.colors.$pink}
             inactiveColor={theme.colors.$menu}
             barStyle={{ backgroundColor: theme.colors.$light_gray }}

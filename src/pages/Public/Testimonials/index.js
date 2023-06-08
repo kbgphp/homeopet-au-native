@@ -62,7 +62,7 @@ export default function Testimonials(props) {
   const header = () => {
     return (
       <View style={styles.section}>
-        <Text style={styles.bodyText}>{"Testimonials"}</Text>
+        <Text style={styles.pageTitle}>{"Testimonials"}</Text>
       </View>
     )
   }
@@ -113,13 +113,12 @@ const makeStyles = (theme) =>
       backgroundColor: "#ffffff",
       flex: 1
     },
-    bodyText: {
-      fontSize: 20,
+    pageTitle: {
+      marginTop: 14,
+      marginBottom: 12,
+      fontSize: theme.fonts.$font_xl,
       textAlign: "center",
       color: theme.colors.$pink,
-      marginTop: 22,
-      fontWeight: 400,
-      backgroundColor: "#ffffff",
       fontFamily: theme.fonts.$serifReg,
     },
     header: {

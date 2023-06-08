@@ -30,7 +30,6 @@ export default ({ props }) => {
                         onChangeText={onChangeSearchText}
                         value={searchText}
                         autoComplete='off'
-                        enterKeyHint={'done'}
                         placeholder="Enter product or symptom"
                         inputMode='search'
                         clearButtonMode='while-editing'

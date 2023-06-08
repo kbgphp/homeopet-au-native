@@ -11,17 +11,16 @@ import 'react-native-gesture-handler';
 import Toast from 'react-native-toast-message';
 import { toastConfig } from "./config";
 import { _REST } from './services';
-
-
-
+import { StatusBar, } from 'react-native';
+ import { ExitModal } from './components/global';
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {
     async function prepare() {
       try {
-   
-  
+
+
       } catch (e) {
         console.warn(e);
       } finally {
@@ -33,9 +32,7 @@ export default function App() {
 
 
   const onLayoutRootView = useCallback(async () => {
-    if (appIsReady) {
-     
-    }
+    if (appIsReady) { }
   }, [appIsReady]);
 
   if (!appIsReady) {
@@ -48,7 +45,9 @@ export default function App() {
         <PaperProvider theme={theme} >
           <SafeAreaProvider>
             <NavigationContainer onReady={onLayoutRootView}>
+              <StatusBar animated={true} backgroundColor="#c9407734" barStyle={'dark-content'} />
               <Main />
+              <ExitModal/>
               <Toast config={toastConfig} />
             </NavigationContainer>
           </SafeAreaProvider>
@@ -57,3 +56,4 @@ export default function App() {
     </Provider>
   );
 }
+

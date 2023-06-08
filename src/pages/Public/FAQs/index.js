@@ -57,13 +57,13 @@ export default function FAQs(props) {
 
   const header = () => (
     <View style={styles.section}>
-      <Text style={styles.bodyText}>{"FAQs"}</Text>
+      <Text style={styles.pageTitle}>{"FAQs"}</Text>
       <View style={styles.container}>
         <View>
           <Text style={styles.heading}> We have compiled an FAQ to help answer some of the more common questions asked about HomeoPet.</Text>
         </View>
         <View>
-          <Text style={styles.content}>
+          <Text style={styles.pageDesc}>
             If for any reason you don't find what you're looking for, please
             feel free to contact us or drop us an email with your questions. One
             of our customer support staff will do their very best to address
@@ -102,12 +102,13 @@ const makeStyles = (theme) =>
       marginHorizontal: 20,
       backgroundColor: "#ffffff",
     },
-    bodyText: {
+    pageTitle: {
+      marginTop:14,
+      marginBottom:12,
       fontSize: theme.fonts.$font_xl,
       textAlign: "center",
       color: theme.colors.$pink,
-      fontFamily: theme.fonts.$sansReg,
-      marginVertical:10
+      fontFamily: theme.fonts.$serifReg,
     },
     heading: {
       color: theme.colors.$light_green,
@@ -115,7 +116,7 @@ const makeStyles = (theme) =>
       fontSize: theme.fonts.$font_md,
       paddingRight: 20,
     },
-    content: {
+    pageDesc: {
       marginVertical:16,
       color: theme.colors.$text,
       fontFamily: theme.fonts.$sansReg,

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList,Platform,KeyboardAvoidingView } from 'react-native';
 import { BackTextButton, ProductListItem, QuickSearch } from "../../components/global"
 import { _REST } from '../../services';
-import {  NoDataFound } from '../../components/elements';
+import { NoDataFound } from '../../components/elements';
 import { useSelector, } from 'react-redux';
 
 export default function RecommendedProducts(props) {
@@ -13,24 +13,30 @@ export default function RecommendedProducts(props) {
 
     const Header = () => (
         <View style={styles.header}>
-            <Text style={styles.headerText}>Recommended {(PRODUCTS?.length > 1 ? 'Medicines' : 'Medicine')}</Text>
+            <Text style={styles.headerText}>Recommended {(PRODUCTS?.length > 1 ? 'Formulas' : 'Formula')}</Text>
         </View>
     )
 
     return (
-        <>
-            <BackTextButton props={props} />
-            <FlatList
-                showsVerticalScrollIndicator={false}
-                data={PRODUCTS}
-                renderItem={({ item }) => <ProductListItem props={props} data={item} img={item?.featured_image} />}
-                ListHeaderComponent={<Header />}
-                ListEmptyComponent={<NoDataFound text={'No data found'} />}
-                style={{ backgroundColor: theme.colors.$white }}
 
-            />
-            <QuickSearch props={props} />
-        </>
+        <View style={{ flex: 1 }}>
+            <BackTextButton props={props} />
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                style={{ flex: 1 }}
+                keyboardVerticalOffset={Platform.OS === 'ios' ? 70 : 140}
+            >
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={PRODUCTS}
+                    renderItem={({ item }) => <ProductListItem props={props} data={item} img={item?.featured_image} />}
+                    ListHeaderComponent={<Header />}
+                    ListEmptyComponent={<NoDataFound text={'No data found'} />}
+                    style={{ backgroundColor: theme.colors.$white }}
+                />
+                <QuickSearch props={props} />
+            </KeyboardAvoidingView>
+        </View>
     );
 }
 

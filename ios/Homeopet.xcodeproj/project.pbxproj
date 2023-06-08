@@ -57,6 +57,7 @@
 		EFDA306E33844F3693DF1D9F /* Montserrat.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Montserrat.ttf; path = ../src/assets/fonts/Montserrat.ttf; sourceTree = "<group>"; };
 		F036FEB22A29C7580023CFC1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F036FEB42A2A0AD90023CFC1 /* HomeopetRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = HomeopetRelease.entitlements; path = Homeopet/HomeopetRelease.entitlements; sourceTree = "<group>"; };
+		F08413872A3057B8006AA1F2 /* HomeopetDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = HomeopetDebug.entitlements; path = Homeopet/HomeopetDebug.entitlements; sourceTree = "<group>"; };
 		F4990D25B8BC4104B6AC628A /* PTSerif-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "PTSerif-Bold.ttf"; path = "../src/assets/fonts/PTSerif-Bold.ttf"; sourceTree = "<group>"; };
 		FA37779BBE3644D798A5FCCE /* PTSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "PTSans-Bold.ttf"; path = "../src/assets/fonts/PTSans-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,6 +102,7 @@
 		13B07FAE1A68108700A75B9A /* Homeopet */ = {
 			isa = PBXGroup;
 			children = (
+				F08413872A3057B8006AA1F2 /* HomeopetDebug.entitlements */,
 				F036FEB42A2A0AD90023CFC1 /* HomeopetRelease.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -537,11 +539,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_ENTITLEMENTS = Homeopet/HomeopetDebug.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 69898725T9;
+				DEVELOPMENT_TEAM = 69898725T9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Homeopet/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Homeopet Med Ed - AU";
@@ -558,7 +560,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeopet.au;
 				PRODUCT_NAME = Homeopet;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = distprofilehomeopetau;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -576,12 +577,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Homeopet/HomeopetRelease.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 69898725T9;
+				DEVELOPMENT_TEAM = 69898725T9;
 				INFOPLIST_FILE = Homeopet/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Homeopet Med Ed - AU";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -597,7 +596,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeopet.au;
 				PRODUCT_NAME = Homeopet;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "dist-profile-homeopet-au";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

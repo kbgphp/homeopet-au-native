@@ -27,13 +27,16 @@ export const notificationSlice = createSlice({
       state.blogNotificationOn = action.payload
     },
     addNotificationCount: (state) => {
-      state.count++
+      state.count++;
+      state.newNotification = true
     },
     setNotificationPermission: (state,action) => {
       state.notificationAllowed = action.payload
     },
-
-
+    resetNotificationCount: (state) => {
+      state.count=0;
+      state.newNotification = false
+    },
     resetNotificationSetting: (state) => {
       state.newNotification = false
       state.count = 0
@@ -52,6 +55,7 @@ export const {
   toggleBlogON,
   addNotificationCount,
   setNotificationPermission,
+  resetNotificationCount,
   resetNotificationSetting
 } = notificationSlice.actions;
 
@@ -60,19 +64,8 @@ export default notificationSlice.reducer;
 
 
 export const setCompetitionSetting = (val) => async dispatch => {
-  if (val) {
-    messaging()
-      .subscribeToTopic('competitions')
-      .then(() => console.log('Subscribed to competitions!'));
-  } else {
-    messaging()
-      .unsubscribeFromTopic('competitions')
-      .then(() => console.log('UnSubscribed to competitions!'));
-  }
-
-  // (val) ? messaging().subscribeToTopic('competitions') : messaging().unsubscribeFromTopic('competitions')
-
   try {
+  (val) ? messaging().subscribeToTopic('competitions') : messaging().unsubscribeFromTopic('competitions')
     dispatch(toggleCompetitionON(val));
   } catch (e) { }
 }

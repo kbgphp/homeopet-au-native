@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
-import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, FlatList,Platform } from 'react-native';
 import { BackTextButton, ProductListItem, QuickSearch } from "../../../../components/global"
 import { _REST } from '../../../../services';
 import { ActivityLoader, NoDataFound } from '../../../../components/elements';
@@ -23,38 +23,37 @@ export default function CategoryProducts(props) {
     }, []);
 
 
-    return (
-        <>
-            <BackTextButton props={props} />
-            {isProcessing ?
-                <ActivityLoader /> :
-                <ScrollView style={styles.scrollView}
-                    nestedScrollEnabled={true}
-                    showsVerticalScrollIndicator={false}
-                    alwaysBounceVertical={false}
-                >
-                    <View style={{ backgroundColor: theme.colors.$white }}>
-                        <View style={styles.catInfo}>
-                            <Text style={styles.catName}>{CAT_DATA?.cat_name}</Text>
-                            <Text style={styles.catDesc}>{CAT_DATA?.cat_info} </Text>
-                        </View>
+    const Header = () => (
+        <View style={{ backgroundColor: theme.colors.$white }}>
+            <View style={styles.catInfo}>
+                <Text style={styles.catName}>{CAT_DATA?.cat_name}</Text>
+                <Text style={styles.catDesc}>{CAT_DATA?.cat_info} </Text>
+            </View>
+        </View>
+    )
 
-                        <View style={styles.recommendedMedicines}>
-                            {CAT_DATA?.products && CAT_DATA?.products?.length > 0 ?
-                                CAT_DATA?.products.map((item, i) => (
-                                    <View key={i}>
-                                        <ProductListItem props={props} data={item} />
-                                    </View>
-                                ))
-                                :
-                                <NoDataFound text={'No data found'} />
-                            }
-                        </View>
-                    </View>
-                </ScrollView>
-            }
-            <QuickSearch />
-        </>
+    return (
+        <View style={{ flex: 1 }}>
+            <BackTextButton props={props} />
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                style={{ flex: 1 }}
+                keyboardVerticalOffset={Platform.OS === 'ios' ? 70 : 135}
+            >
+                {isProcessing ?
+                    <ActivityLoader /> :
+                    <FlatList
+                        showsVerticalScrollIndicator={false}
+                        data={CAT_DATA?.products}
+                        renderItem={({ item }) => <ProductListItem props={props} data={item}  />}
+                        ListHeaderComponent={<Header />}
+                        ListEmptyComponent={<NoDataFound text={'No data found'} />}
+                        style={{ backgroundColor: theme.colors.$white }}
+                    />
+                }
+                <QuickSearch props={props} />
+            </KeyboardAvoidingView>
+        </View>
 
     );
 }

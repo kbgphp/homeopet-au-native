@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, KeyboardAvoidingView, Platform } from 'react-native';
 import { BackTextButton, ProductListItem, QuickSearch } from "../../components/global"
 import { _REST } from '../../services';
 import { ActivityLoader, NoDataFound } from '../../components/elements';
@@ -19,11 +19,7 @@ export default function SearchResults(props) {
     React.useEffect(() => {
         const searchProducts = async () => {
             setIsProcessing(true);
-            const res = await _REST.CUSTOM_POST("search", {
-                search: searchText,
-                record_per_page: resultsPerPage,
-                paged: pageNo
-            });
+            const res = await _REST.CUSTOM_POST("pro-data-search", { search_text: searchText, });
             if (res.data?.products) {
                 setPRODUCTS([...PRODUCTS, ...res.data?.products]);
             }
@@ -50,7 +46,7 @@ export default function SearchResults(props) {
 
     const Header = () => (
         <View style={styles.header}>
-            <Text style={styles.headerText}>Recommended {(PRODUCTS?.length > 1 ? 'Medicines' : 'Medicine')}</Text>
+            <Text style={styles.headerText}>Recommended {(PRODUCTS?.length > 1 ? 'Formulas' : 'Formula')}</Text>
         </View>
     )
 
@@ -63,28 +59,34 @@ export default function SearchResults(props) {
 
 
     return (
-        <>
-            <BackTextButton props={props} />
-            {isProcessing && !dataLoaded ?
-                <ActivityLoader /> :
 
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    data={PRODUCTS}
-                    renderItem={({ item }) => <ProductListItem props={props} data={item} />}
-                    ListHeaderComponent={<Header />}
-                    ListFooterComponent={renderFooter}
-                    ListEmptyComponent={<NoDataFound text={'No data found'} />}
-                    onEndReachedThreshold={0.5}
-                    onEndReached={({ distanceFromEnd }) => {
-                        if (distanceFromEnd === 0) return;
-                        fetchMoreData()
-                    }}
-                    style={{ backgroundColor: theme.colors.$white }}
-                />
-            }
-            <QuickSearch props={props} />
-        </>
+        <View style={{ flex: 1 }}>
+            <BackTextButton props={props} />
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                style={{ flex: 1 }}
+                keyboardVerticalOffset={Platform.OS === 'ios' ? 70 : 140}
+            >
+                {isProcessing && !dataLoaded ?
+                    <ActivityLoader /> :
+                    <FlatList
+                        showsVerticalScrollIndicator={false}
+                        data={PRODUCTS}
+                        renderItem={({ item }) => <ProductListItem props={props} data={item} />}
+                        ListHeaderComponent={<Header />}
+                        ListFooterComponent={renderFooter}
+                        ListEmptyComponent={<NoDataFound text={'No data found'} />}
+                        onEndReachedThreshold={0.5}
+                        onEndReached={({ distanceFromEnd }) => {
+                            if (distanceFromEnd === 0) return;
+                            fetchMoreData()
+                        }}
+                        style={{ backgroundColor: theme.colors.$white }}
+                    />
+                }
+                <QuickSearch props={props} />
+            </KeyboardAvoidingView>
+        </View>
     );
 }
 

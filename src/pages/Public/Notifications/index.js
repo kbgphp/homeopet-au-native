@@ -4,10 +4,12 @@ import { useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useSelector, useDispatch } from 'react-redux';
 
+
 import { ActivityLoader } from '../../../components/elements';
 import { BackIconButton } from "../../../components/global"
 import NotificationOff from "./NotificationOff";
 import ZeroNotification from './ZeroNotification';
+import { resetNotificationCount } from '../../../redux/slices/notificationSlice';
 
 export default function Notifications(props) {
     React.useEffect(() => {
@@ -16,20 +18,26 @@ export default function Notifications(props) {
             headerRight: () => <HeaderRight />,
         })
     }, [])
+    const dispatch = useDispatch();
     const theme = useTheme();
     const styles = makeStyles(theme);
     const [isProcessing, setIsProcessing] = React.useState(false);
 
     const NOTIFICATION = useSelector((state) => state?.notification);
-    console.log('NOTIFICATION: ', NOTIFICATION);
     const isNotificationON = NOTIFICATION?.competitionNotificationOn || NOTIFICATION?.newProductNotificationOn || NOTIFICATION?.blogNotificationOn;
-
 
     const HeaderRight = () => (
         <View style={{ paddingRight: 8 }}>
             <Icon name="bell" size={28} style={styles.icon} />
         </View>
     )
+
+
+    React.useEffect(() => {
+        setTimeout(() => {
+            dispatch(resetNotificationCount());
+        }, 2000);
+    }, [])
 
     return (
         <>

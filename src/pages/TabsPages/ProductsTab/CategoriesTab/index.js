@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
-import { StyleSheet, Text, Image, View, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, Image, View, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Platform, TouchableOpacity, Keyboard } from 'react-native';
 import { NavBar, QuickSearch } from "../../../../components/global"
 import { PinkHeaderWithBird } from "../../../../components/elements"
 import { getDimension } from '../../../../utils';
 import { useSelector } from 'react-redux';
-
 
 
 export default function CategoriesTab(props, setIsNavbarPage) {
@@ -19,38 +18,43 @@ export default function CategoriesTab(props, setIsNavbarPage) {
     }
 
     return (
-        <>
+        <View style={{ flex: 1 }}>
             <NavBar props={props} setIsNavbarPage={setIsNavbarPage} />
-            <ScrollView style={styles.scrollView}
-                nestedScrollEnabled={true}
-                showsVerticalScrollIndicator={false}
-                alwaysBounceVertical={false}
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                style={{ flex: 1 }}
+                keyboardVerticalOffset={70}
             >
-                <View style={{ backgroundColor: 'white' }}>
-                    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                        <View>
-                            <PinkHeaderWithBird text={'Categories'} />
-                        </View>
-                        <View style={{ alignItems: 'center', marginTop: 8 }}>
-                            <Text style={styles.descText}>Choose the category.</Text>
-                            <Text style={[styles.descText, { marginTop: 6 }]}>The app will show you the possibilities</Text>
+                <ScrollView style={styles.scrollView}
+                    nestedScrollEnabled={true}
+                    showsVerticalScrollIndicator={false}
+                    alwaysBounceVertical={false}>
+                    <View style={{ backgroundColor: 'white' }}>
+                        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                            <View>
+                                <PinkHeaderWithBird text={'Categories'} />
+                            </View>
+                            <View style={{ alignItems: 'center', marginTop: 8 }}>
+                                <Text style={styles.descText}>Choose the category.</Text>
+                                <Text style={[styles.descText, { marginTop: 6 }]}>The app will show you the possibilities</Text>
+                            </View>
                         </View>
                     </View>
-                </View>
 
-                <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center',marginTop:24 }}>
-                    {CATEGORIES && CATEGORIES?.length > 0 && CATEGORIES?.map((item, i) => (
-                        <View key={i} style={styles.boxStyle} >
-                            <TouchableOpacity activeOpacity={.8} onPress={() => selectCategory(item?.id)} style={{ justifyContent: 'center', alignItems: 'center', }}>
-                                <Image style={styles.categoryImg} source={{ uri: item?.image }} />
-                                <Text style={styles.categoryName}>{item?.title}</Text>
-                            </TouchableOpacity>
-                        </View>
-                    ))}
-                </View>
-            </ScrollView>
-            <QuickSearch props={props} />
-        </>
+                    <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', marginTop: 24 }}>
+                        {CATEGORIES && CATEGORIES?.length > 0 && CATEGORIES?.map((item, i) => (
+                            <View key={i} style={styles.boxStyle} >
+                                <TouchableOpacity activeOpacity={.8} onPress={() => selectCategory(item?.id)} style={{ justifyContent: 'center', alignItems: 'center', }}>
+                                    <Image style={styles.categoryImg} source={{ uri: item?.image }} />
+                                    <Text style={styles.categoryName}>{item?.title}</Text>
+                                </TouchableOpacity>
+                            </View>
+                        ))}
+                    </View>
+                </ScrollView>
+                <QuickSearch props={props} />
+            </KeyboardAvoidingView>
+        </View>
     );
 }
 

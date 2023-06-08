@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { NavigationContainer, } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Platform } from 'react-native';
+import { Platform, Alert, PermissionsAndroid } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { LogoTitle } from './components/elements';
 import { WelcomeScreen, AppSettings, Notifications, WebInView } from "./pages/Public";
 import { getAppData } from './redux/slices/appDataSlice';
-import { setNotificationPermission } from './redux/slices/notificationSlice';
+import { setNotificationPermission,addNotificationCount } from './redux/slices/notificationSlice';
 import Tabs from "./pages/Tabs";
-import { PermissionsAndroid } from 'react-native';
+
 import messaging from '@react-native-firebase/messaging';
 // import firebase from '@react-native-firebase/app';
 const Stack = createNativeStackNavigator();
@@ -35,7 +35,7 @@ export default function Main(props) {
 
         if (enabled) {
           dispatch(setNotificationPermission(enabled));
-          await messaging().registerDeviceForRemoteMessages();
+          // await messaging().registerDeviceForRemoteMessages();
           const token = await messaging().getToken();
           console.log('token: ', token);
         }
@@ -47,17 +47,18 @@ export default function Main(props) {
   }, [])
 
   React.useEffect(() => {
-
     // open state
     const unsubscribe = messaging().onMessage(async remoteMessage => {
+      dispatch(addNotificationCount());
       Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
     });
 
     return unsubscribe;
   }, []);
 
-
+  // background state
   messaging().setBackgroundMessageHandler(async remoteMessage => {
+    dispatch(addNotificationCount());
     console.log('Message handled in the background!', remoteMessage);
   });
 
@@ -86,6 +87,8 @@ export default function Main(props) {
       </Stack.Navigator>
     </NavigationContainer>
   );
+
+
 }
 
 

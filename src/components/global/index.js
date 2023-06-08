@@ -6,4 +6,5 @@ export { default as ProblemAreaKey } from "./ProblemAreaKey";
 export { default as BackTextButton } from "./BackTextButton";
 export { default as BackIconButton } from "./BackIconButton";
 export { default as HeaderRight } from "./HeaderRight";
+export { default as ExitModal } from "./ExitModal";
 
