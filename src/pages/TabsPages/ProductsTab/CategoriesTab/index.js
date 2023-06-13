@@ -21,9 +21,9 @@ export default function CategoriesTab(props, setIsNavbarPage) {
         <View style={{ flex: 1 }}>
             <NavBar props={props} setIsNavbarPage={setIsNavbarPage} />
             <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                behavior={Platform.OS === 'ios' ? 'padding' : null}
                 style={{ flex: 1 }}
-                keyboardVerticalOffset={70}
+                keyboardVerticalOffset={Platform.OS === 'ios' ? 70 : null}
             >
                 <ScrollView style={styles.scrollView}
                     nestedScrollEnabled={true}

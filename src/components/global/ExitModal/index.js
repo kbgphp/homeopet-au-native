@@ -33,8 +33,8 @@ export default ({ }) => {
             <Modal
                 hideModalContentWhileAnimating={true}
                 isVisible={isOpen}
-                onBackButtonPress={() => { setExitModalOpen(!isOpen) }}
-                onBackdropPress={() => { setExitModalOpen(!isOpen) }}
+                onBackButtonPress={() => { setIsOpen(!isOpen) }}
+                onBackdropPress={() => { setIsOpen(!isOpen) }}
             >
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>

@@ -36,9 +36,9 @@ export default function CategoryProducts(props) {
         <View style={{ flex: 1 }}>
             <BackTextButton props={props} />
             <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                behavior={Platform.OS === 'ios' ? 'padding' : null}
                 style={{ flex: 1 }}
-                keyboardVerticalOffset={Platform.OS === 'ios' ? 70 : 135}
+                keyboardVerticalOffset={Platform.OS === 'ios' ? 70 : null}
             >
                 {isProcessing ?
                     <ActivityLoader /> :

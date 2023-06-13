@@ -6,7 +6,7 @@ export const bandage =  require("../assets/images/bandage.png");
 export const canine =  require("../assets/images/canine.jpg");
 export const feline =  require("../assets/images/feline.jpg");
 export const equine =  require("../assets/images/equine.jpg");
-
+export const not_avl_img =  require("../assets/images/not_avl_img.png");
 
 
 
@@ -18,5 +18,6 @@ export default{
     bandage,
     canine,
     feline,
-    equine
+    equine,
+    not_avl_img
 }

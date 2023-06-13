@@ -63,9 +63,9 @@ export default function SearchResults(props) {
         <View style={{ flex: 1 }}>
             <BackTextButton props={props} />
             <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                behavior={Platform.OS === 'ios' ? 'padding' : null}
                 style={{ flex: 1 }}
-                keyboardVerticalOffset={Platform.OS === 'ios' ? 70 : 140}
+                keyboardVerticalOffset={Platform.OS === 'ios' ? 70 : null}
             >
                 {isProcessing && !dataLoaded ?
                     <ActivityLoader /> :

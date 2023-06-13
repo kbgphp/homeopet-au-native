@@ -85,6 +85,7 @@ export default function FAQs(props) {
           renderItem={renderItem}
           ListHeaderComponent={header}
           style={{backgroundColor:'#ffffff'}}
+          showsVerticalScrollIndicator={false}
         />
       ) : (
         <ActivityLoader />

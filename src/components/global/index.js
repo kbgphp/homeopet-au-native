@@ -7,4 +7,4 @@ export { default as BackTextButton } from "./BackTextButton";
 export { default as BackIconButton } from "./BackIconButton";
 export { default as HeaderRight } from "./HeaderRight";
 export { default as ExitModal } from "./ExitModal";
-
+export { default as NetworkModal } from "./NetworkModal";

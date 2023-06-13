@@ -20,7 +20,7 @@ export default function Main(props) {
   const isFirstTime = useSelector((state) => state.isFirstTime?.value);
 
   React.useEffect(() => {
-    dispatch(getAppData());              // fetch App Data
+    dispatch(getAppData());                     // fetch App Data
   }, []);
 
   React.useEffect(() => {
@@ -50,7 +50,8 @@ export default function Main(props) {
     // open state
     const unsubscribe = messaging().onMessage(async remoteMessage => {
       dispatch(addNotificationCount());
-      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+      Alert.alert(remoteMessage?.notification?.title, remoteMessage?.notification?.body,);
+      // Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
     });
 
     return unsubscribe;

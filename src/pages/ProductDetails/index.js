@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
-import { StyleSheet, Text, Image, Linking, View, ScrollView, KeyboardAvoidingView,Platform, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, Image, Linking, View, ScrollView, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import { BackTextButton, ProductListItem, QuickSearch } from "../../components/global";
 
 
@@ -54,9 +54,9 @@ export default function ProductDetails(props) {
         <View style={{ flex: 1 }}>
             <BackTextButton props={props} />
             <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                behavior={Platform.OS === 'ios' ? 'padding' : null}
                 style={{ flex: 1 }}
-                keyboardVerticalOffset={Platform.OS === 'ios' ? 70 : 140}
+                keyboardVerticalOffset={Platform.OS === 'ios' ? 70 : null}
             >
                 {isProcessing ? <ActivityLoader /> : null}
                 {(!isProcessing && dataLoaded) ?

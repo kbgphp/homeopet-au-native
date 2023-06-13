@@ -9,7 +9,7 @@ ios-
 -$ npx pod-install ios 
 -add manually font family in info.plist
 ========================
-
+Update Android=> app=> build.gradle
 ======================
 const { width: windowWidth } = Dimensions.get('window');
 ===========================

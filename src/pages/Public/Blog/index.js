@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList,KeyboardAvoidingView,Platform } from "react-native";
+import { StyleSheet, Text, View, FlatList, KeyboardAvoidingView, Platform } from "react-native";
 import { useTheme } from 'react-native-paper';
 import { NavBar } from "../../../components/global";
 import { _REST } from "../../../services";
@@ -31,15 +31,16 @@ export default function Blog(props) {
     <View style={{ flex: 1 }}>
       <NavBar props={props} />
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === 'ios' ? 'padding' : null}
         style={{ flex: 1 }}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 70 : 120}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 70 : null}
       >
         <FlatList
           data={blogData}
           ListHeaderComponent={renderHeader}
           renderItem={({ item }) => <BlogCard props={props} data={item} />}
           keyExtractor={(item, i) => i}
+          showsVerticalScrollIndicator={false}
         />
         <QuickSearch props={props} />
       </KeyboardAvoidingView>

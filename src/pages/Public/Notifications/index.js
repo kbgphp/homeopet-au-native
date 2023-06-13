@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, Image, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useSelector, useDispatch } from 'react-redux';

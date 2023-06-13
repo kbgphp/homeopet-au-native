@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, Image, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 

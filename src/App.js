@@ -12,7 +12,7 @@ import Toast from 'react-native-toast-message';
 import { toastConfig } from "./config";
 import { _REST } from './services';
 import { StatusBar, } from 'react-native';
- import { ExitModal } from './components/global';
+import { NetworkModal } from './components/global';
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
 
@@ -47,8 +47,8 @@ export default function App() {
             <NavigationContainer onReady={onLayoutRootView}>
               <StatusBar animated={true} backgroundColor="#c9407734" barStyle={'dark-content'} />
               <Main />
-              <ExitModal/>
               <Toast config={toastConfig} />
+              <NetworkModal />
             </NavigationContainer>
           </SafeAreaProvider>
         </PaperProvider>

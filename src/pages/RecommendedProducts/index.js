@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
-import { StyleSheet, Text, View, FlatList,Platform,KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Platform, KeyboardAvoidingView } from 'react-native';
 import { BackTextButton, ProductListItem, QuickSearch } from "../../components/global"
 import { _REST } from '../../services';
 import { NoDataFound } from '../../components/elements';
@@ -22,9 +22,9 @@ export default function RecommendedProducts(props) {
         <View style={{ flex: 1 }}>
             <BackTextButton props={props} />
             <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                behavior={Platform.OS === 'ios' ? 'padding' : null}
                 style={{ flex: 1 }}
-                keyboardVerticalOffset={Platform.OS === 'ios' ? 70 : 140}
+                keyboardVerticalOffset={Platform.OS === 'ios' ? 70 : null}
             >
                 <FlatList
                     showsVerticalScrollIndicator={false}
