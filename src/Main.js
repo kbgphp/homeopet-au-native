@@ -10,11 +10,12 @@ import { getAppData } from './redux/slices/appDataSlice';
 import { setNotificationPermission,addNotificationCount } from './redux/slices/notificationSlice';
 import Tabs from "./pages/Tabs";
 
+
 import messaging from '@react-native-firebase/messaging';
 // import firebase from '@react-native-firebase/app';
 const Stack = createNativeStackNavigator();
 
-export default function Main(props) {
+export default function Main() {
   const theme = useTheme();
   const dispatch = useDispatch();
   const isFirstTime = useSelector((state) => state.isFirstTime?.value);
@@ -46,22 +47,16 @@ export default function Main(props) {
     initializeNotification()
   }, [])
 
-  React.useEffect(() => {
-    // open state
-    const unsubscribe = messaging().onMessage(async remoteMessage => {
-      dispatch(addNotificationCount());
-      Alert.alert(remoteMessage?.notification?.title, remoteMessage?.notification?.body,);
-      // Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
-    });
 
-    return unsubscribe;
-  }, []);
 
   // background state
   messaging().setBackgroundMessageHandler(async remoteMessage => {
     dispatch(addNotificationCount());
     console.log('Message handled in the background!', remoteMessage);
   });
+
+
+
 
 
   return (

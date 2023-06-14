@@ -2,6 +2,8 @@ import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import messaging from '@react-native-firebase/messaging';
+
 import HomeTab from '../TabsPages/HomeTab';
 import ProductsTab from '../TabsPages/ProductsTab';
 import SearchTab from '../TabsPages/SearchTab';
@@ -13,6 +15,19 @@ import { HeaderRight, ExitModal } from '../../components/global';
 const Tab = createBottomTabNavigator();
 export default function Tabs(props) {
     const theme = useTheme();
+
+
+    React.useEffect(() => {
+        // tap on notification when app is running in background
+        messaging().onNotificationOpenedApp(remoteMessage => {
+            // console.log('-------------------------------------');
+            // console.log('remoteMessage::', remoteMessage);
+            // console.log('-------------------------------------');
+            // (remoteMessage.data.url) ? props.navigation.navigate(remoteMessage.data.url) : null;
+        });
+    }, []);
+
+
     return (
         <>
             <Tab.Navigator initialRouteName="Home"

@@ -12,7 +12,8 @@ import Toast from 'react-native-toast-message';
 import { toastConfig } from "./config";
 import { _REST } from './services';
 import { StatusBar, } from 'react-native';
-import { NetworkModal } from './components/global';
+import { NetworkModal,NotificationModal } from './components/global';
+
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
 
@@ -49,6 +50,7 @@ export default function App() {
               <Main />
               <Toast config={toastConfig} />
               <NetworkModal />
+              <NotificationModal />
             </NavigationContainer>
           </SafeAreaProvider>
         </PaperProvider>
