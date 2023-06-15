@@ -1,8 +1,6 @@
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, Image, View, TouchableOpacity } from 'react-native';
 import { images, icons } from "../../../../constants";
-
 
 export default ({symptomPoint, setSymptomPoint}) => {
     const theme = useTheme();

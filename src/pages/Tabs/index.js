@@ -20,9 +20,6 @@ export default function Tabs(props) {
     React.useEffect(() => {
         // tap on notification when app is running in background
         messaging().onNotificationOpenedApp(remoteMessage => {
-            // console.log('-------------------------------------');
-            // console.log('remoteMessage::', remoteMessage);
-            // console.log('-------------------------------------');
             // (remoteMessage.data.url) ? props.navigation.navigate(remoteMessage.data.url) : null;
         });
     }, []);

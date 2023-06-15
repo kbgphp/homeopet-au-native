@@ -4,7 +4,6 @@ import { useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useSelector, useDispatch } from 'react-redux';
 
-
 import { ActivityLoader } from '../../../components/elements';
 import { BackIconButton } from "../../../components/global"
 import NotificationOff from "./NotificationOff";
@@ -31,7 +30,6 @@ export default function Notifications(props) {
             <Icon name="bell" size={28} style={styles.icon} />
         </View>
     )
-
 
     React.useEffect(() => {
         setTimeout(() => {

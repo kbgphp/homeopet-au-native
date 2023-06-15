@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import Slider from '@react-native-community/slider';
 

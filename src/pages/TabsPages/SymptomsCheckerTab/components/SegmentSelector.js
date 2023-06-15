@@ -1,7 +1,5 @@
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-
 
 export default ({ selectedPet, setSelectedPet }) => {
     const theme = useTheme();
@@ -21,7 +19,6 @@ export default ({ selectedPet, setSelectedPet }) => {
     );
 }
 
-
 const makeStyles = (theme) => StyleSheet.create({
     segmentContainer: {
         flex: 1,
@@ -35,7 +32,6 @@ const makeStyles = (theme) => StyleSheet.create({
     segment: {
         flex: 1,
     },
-
     activeSegment: {
         borderBottomWidth: 3,
         borderColor: theme.colors.$pink,

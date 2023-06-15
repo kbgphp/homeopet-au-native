@@ -27,7 +27,7 @@ export default () => {
             </TouchableOpacity>
             {expanded && (
                 <View style={styles.accordBody}>
-                    <Text style={styles.textSmall}> as a definitive diagnosis. Some symptoms can have a wide range of causes so ALWAYS consult your vet if in any doubt.</Text>
+                    <Text style={styles.textSmall}>as a definitive diagnosis. Some symptoms can have a wide range of causes so ALWAYS consult your vet if in any doubt.</Text>
                 </View>
             )}
         </View>

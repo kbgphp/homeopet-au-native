@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, Image, View, ScrollView, TouchableOpacity } from 'react-native';
-import { NavBar, ProductListItem, QuickSearch, Disclaimer } from "../../../components/global";
-import { PinkHeaderWithSticker, ActivityLoader } from "../../../components/elements";
-import { images } from "../../../constants";
-import { getDimension } from '../../../utils';
+import Spinner from 'react-native-loading-spinner-overlay';
 import { useSelector, useDispatch } from 'react-redux';
+
+import { NavBar, QuickSearch, Disclaimer } from "../../../components/global";
+import { PinkHeaderWithSticker, ActivityLoader } from "../../../components/elements";
+import { getDimension } from '../../../utils';
 import { _REST } from '../../../services';
 import { fetchProducts } from "../../../redux/slices/productsListSlice";
-import Spinner from 'react-native-loading-spinner-overlay';
 
 export default function SearchTab(props) {
     const theme = useTheme();
@@ -106,7 +106,6 @@ const makeStyles = (theme, window) => StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-
     gridImage: {
         height: 85,
         width: '100%',

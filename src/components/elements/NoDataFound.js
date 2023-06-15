@@ -1,7 +1,5 @@
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, View, Text } from 'react-native';
-
 
 export default ({ text }) => {
     const theme = useTheme();

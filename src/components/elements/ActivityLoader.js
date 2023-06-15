@@ -1,8 +1,6 @@
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, View, Text } from 'react-native';
 import { MaterialIndicator } from 'react-native-indicators';
-
 
 export default ({ text, size = 40 }) => {
     const theme = useTheme();
@@ -17,13 +15,11 @@ export default ({ text, size = 40 }) => {
     );
 }
 
-
 const makeStyles = (theme) => StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: theme.colors.$white
     },
     loader: {
         flexGrow: 0

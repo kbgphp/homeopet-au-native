@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet, Text, View, FlatList, KeyboardAvoidingView, Platform } from "react-native";
 import { useTheme } from 'react-native-paper';
 import { NavBar } from "../../../components/global";
@@ -13,7 +12,6 @@ export default function Blog(props) {
   const styles = makeStyles(theme);
   const blogData = useSelector((state) => state.appData.BIG_DATA.blogs);
 
-
   const renderHeader = () => (
     <View style={styles.headerContainer}>
       <Text style={styles.topRightHeader}>HomeoPet Natural Pet Care Center</Text>
@@ -23,8 +21,6 @@ export default function Blog(props) {
       </View>
     </View>
   );
-
-
 
 
   return (

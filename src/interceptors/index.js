@@ -1,6 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 import { TOAST } from "../utils";
 import { CONFIG } from "../config"
+
 
 
 // Add a request interceptor
@@ -22,7 +23,7 @@ axios.interceptors.response.use(
         TOAST.show('error', error?.response?.data?.msg);
         if (error?.response?.data?.msg) {
             TOAST.show('error', error?.response?.data?.msg);
-        }else if(error?.code ==='ERR_NETWORK'){
+        } else if (error?.code === 'ERR_NETWORK') {
             TOAST.show('error', error?.message);
         }
 
@@ -34,6 +35,7 @@ axios.interceptors.response.use(
     }
 
 )
+
 
 
 

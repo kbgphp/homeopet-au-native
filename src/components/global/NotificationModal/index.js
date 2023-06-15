@@ -3,7 +3,7 @@ import { useTheme } from 'react-native-paper';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Modal from "react-native-modal";
 import messaging from '@react-native-firebase/messaging';
-import { useSelector, useDispatch } from 'react-redux';
+import {  useDispatch } from 'react-redux';
 import { addNotificationCount } from '../../../redux/slices/notificationSlice';
 
 

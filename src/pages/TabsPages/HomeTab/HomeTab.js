@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
-import { StyleSheet, Text, View, ScrollView, SafeAreaView ,RefreshControl} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, RefreshControl } from 'react-native';
 import { NavBar, ProductListItem } from "../../../components/global"
 import { PinkHeaderWithBird } from "../../../components/elements"
 import Vimeo from "./components/Vimeo";
@@ -32,7 +32,7 @@ export default function HomeTab(props) {
                 alwaysBounceVertical={false}
                 overScrollMode="never"
                 removeClippedSubviews={true}
-                // refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={theme.colors.$pink}  tintColor={theme.colors.$pink} />}
+                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[theme.colors.$pink]} tintColor={theme.colors.$text} />}
             >
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View>
@@ -73,5 +73,4 @@ const makeStyles = (theme) => StyleSheet.create({
         fontWeight: 400,
         fontFamily: theme.fonts.$sansReg,
     },
-
 });

@@ -1,14 +1,10 @@
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { Vimeo } from 'react-native-vimeo-iframe';
 import { StyleSheet, View, } from 'react-native';
 
-
-export default ({videoId=737579206}) => {
-
+export default ({ videoId = 737579206 }) => {
     const theme = useTheme();
     const styles = makeStyles(theme);
-
     return (
         <View style={{ flex: 1 }}>
             <Vimeo

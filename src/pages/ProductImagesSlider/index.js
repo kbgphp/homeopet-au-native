@@ -8,9 +8,11 @@ import { useSelector } from 'react-redux';
 export default function ProductImagesSlider(props) {
     const theme = useTheme();
     const styles = makeStyles(theme);
-    const { imgIndex } = props?.route?.params;
+    const { imgIndex, productId } = props?.route?.params;
+
     React.useEffect(() => { props.navigation.setOptions({ headerShown: false, }) }, [])
-    const PRODUCT = useSelector((state) => state?.productData?.data);
+
+    const PRODUCT = useSelector((state) => state?.productsArrObj?.productsDetailsArrObj?.[productId]);
 
     return (
         <View style={{ flex: 1, backgroundColor: theme.colors.$white }}>
@@ -28,24 +30,18 @@ export default function ProductImagesSlider(props) {
                             nextPos: false,
                             dotActiveStyle: { backgroundColor: theme.colors.$pink, height: 12, width: 12, borderRadius: 10 }
                         }}
-
                     >
-                        { PRODUCT?.product_gallery.map((item, i) => (
+                        {PRODUCT?.product_gallery.map((item, i) => (
                             <Image key={i} style={styles.productImg} source={{ uri: item }} />
                         ))}
                     </Swiper>
-
                 }
-
             </View>
         </View>
     );
 }
 
-
-
 const makeStyles = (theme) => StyleSheet.create({
-
     swiperContainer: {
         padding: 20,
         flex: 1,

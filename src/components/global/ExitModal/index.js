@@ -3,7 +3,6 @@ import { useTheme } from 'react-native-paper';
 import { View, Text, TouchableOpacity, BackHandler, StyleSheet } from 'react-native';
 import Modal from "react-native-modal";
 
-
 export default ({ }) => {
     const theme = useTheme();
     const styles = makeStyles(theme);
@@ -57,11 +56,8 @@ export default ({ }) => {
 }
 
 
-
-
 const makeStyles = (theme) => StyleSheet.create({
     centeredView: {
-        // flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
 

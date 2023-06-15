@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NavigationContainer, } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Platform, Alert, PermissionsAndroid } from 'react-native';
+import { Platform, PermissionsAndroid } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { LogoTitle } from './components/elements';
@@ -54,8 +54,6 @@ export default function Main() {
     dispatch(addNotificationCount());
     console.log('Message handled in the background!', remoteMessage);
   });
-
-
 
 
 

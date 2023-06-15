@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useTheme, Badge } from 'react-native-paper';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -31,7 +30,6 @@ const makeStyles = (theme) => StyleSheet.create({
     icon: {
         color: theme.colors.$menu_icon,
     },
-
     dot: {
         backgroundColor: theme.colors.$pink,
         height: 13,

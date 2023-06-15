@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
-import { StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, FlatList,Platform } from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, FlatList,Platform } from 'react-native';
 import { BackTextButton, ProductListItem, QuickSearch } from "../../../../components/global"
 import { _REST } from '../../../../services';
 import { ActivityLoader, NoDataFound } from '../../../../components/elements';
@@ -62,7 +62,6 @@ const makeStyles = (theme) => StyleSheet.create({
     scrollView: {
         flex: 1,
         backgroundColor: theme.colors.$white,
-
     },
     catInfo: {
         paddingHorizontal: 20,

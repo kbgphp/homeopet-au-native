@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, Platform, UIManager, LayoutAnimation, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';

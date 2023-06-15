@@ -1,7 +1,5 @@
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-
 
 export default ({ text, goTo}) => {
     const theme = useTheme();
@@ -12,7 +10,6 @@ export default ({ text, goTo}) => {
         </TouchableOpacity>
     );
 }
-
 
 const makeStyles = (theme) => StyleSheet.create({
     button: {

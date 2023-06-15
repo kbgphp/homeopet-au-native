@@ -106,7 +106,7 @@ export default function SymptomsCheckerTab(props) {
                             <View style={styles.possibleCauses}>
                                 <Text style={styles.subHeader}>Possible Causes</Text>
                                 {causesList?.map((item, i) => (
-                                    <View key={i} style={styles.boxStyle} >
+                                    <View key={i} >
                                         <Text style={[styles.symptomText, { marginBottom: 2 }]}>{i + 1}.{" "}{item?.value}</Text>
                                     </View>
                                 ))}
@@ -161,9 +161,6 @@ const makeStyles = (theme) => StyleSheet.create({
         color: theme.colors.$text,
         fontFamily: theme.fonts.$sansReg,
         marginBottom: 6
-    },
-    boxStyle: {
-
     },
     selectedSymptom: {
         textDecorationLine: 'underline',

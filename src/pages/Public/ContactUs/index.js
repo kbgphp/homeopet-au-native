@@ -69,7 +69,6 @@ export default function ContactUs(props) {
         showsVerticalScrollIndicator={false}
         nestedScrollEnabled={true}
       >
-
         <View style={styles.innerSection}>
           <Text style={styles.pageTitle}>{"Contact Us"}</Text>
           <View>

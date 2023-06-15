@@ -61,11 +61,10 @@ export default function BlogDetails(props) {
 const makeStyles = (theme) =>
     StyleSheet.create({
         rootContainer: {
-            backgroundColor: "#ffffff",
+            backgroundColor: theme.colors.$white,
             flex: 1,
             paddingHorizontal: 20
         },
-
         topRightHeader: {
             textAlign: "right",
             marginVertical: 12,
@@ -82,21 +81,18 @@ const makeStyles = (theme) =>
             fontFamily: theme.fonts.$sansReg,
             paddingBottom: 8
         },
-
         blogHeader: {
             color: theme.colors.$pink,
             fontSize: theme.fonts.$font_lg,
             fontFamily: theme.fonts.$sansReg,
             marginBottom: 10,
         },
-
         divider: {
             width: 40,
             height: 3,
             backgroundColor: theme.colors.$border,
             marginVertical: 6,
         },
-
         postDate: {
             marginVertical: 6,
             marginBottom: 12,
@@ -105,7 +101,6 @@ const makeStyles = (theme) =>
             fontFamily: theme.fonts.$sansReg,
             textTransform: 'uppercase'
         },
-
         imgContainer: {
             width: "100%",
             height: 200,

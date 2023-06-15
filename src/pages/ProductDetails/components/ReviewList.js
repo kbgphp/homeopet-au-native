@@ -1,7 +1,6 @@
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { format, formatDistance, formatRelative, subDays } from 'date-fns'
+import { StyleSheet, Text, View } from 'react-native';
+import { format } from 'date-fns'
 
 export default ({ data }) => {
     const theme = useTheme();

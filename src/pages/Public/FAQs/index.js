@@ -97,11 +97,11 @@ export default function FAQs(props) {
 const makeStyles = (theme) =>
   StyleSheet.create({
     section: {
-      backgroundColor: "#ffffff",
+      backgroundColor: theme.colors.$white,
     },
     container: {
       marginHorizontal: 20,
-      backgroundColor: "#ffffff",
+      backgroundColor: theme.colors.$white,
     },
     pageTitle: {
       marginTop:14,

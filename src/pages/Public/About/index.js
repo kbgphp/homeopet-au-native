@@ -1,4 +1,3 @@
-import React from "react";
 import { StyleSheet, Text, Image, View, ScrollView, } from "react-native";
 import { useWindowDimensions } from 'react-native';
 import { useTheme } from "react-native-paper";
@@ -26,7 +25,6 @@ export default function About(props) {
               rooted deep in the wilds of the South West of ireland.
             </Text>
           </View>
-
           <View>
             <RenderHtml contentWidth={width} source={source} />
           </View>
@@ -40,7 +38,7 @@ export default function About(props) {
 const makeStyles = (theme) =>
   StyleSheet.create({
     section: {
-      backgroundColor: "#fff",
+      backgroundColor: theme.colors.$white
     },
     container: {
       margin: 20,
@@ -59,5 +57,4 @@ const makeStyles = (theme) =>
       marginTop: 5,
       color: theme.colors.$light_green,
     }
-
   });

@@ -1,6 +1,5 @@
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
-import { View, Text,  Platform, TouchableOpacity,Linking, StyleSheet } from 'react-native';
+import { View, Text,  Platform, TouchableOpacity, StyleSheet } from 'react-native';
 import Modal from "react-native-modal";
 
 
@@ -63,12 +62,9 @@ export default ({
                     </View>
                 </View>
             </Modal>
-
         </View>
     );
 }
-
-
 
 
 const makeStyles = (theme) => StyleSheet.create({
@@ -76,13 +72,11 @@ const makeStyles = (theme) => StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-
     },
     modalView: {
         margin: 8,
         padding: 16,
         width: 280,
-        // height: 160,
         borderRadius: 6,
         backgroundColor: 'white',
         shadowColor: '#000',
@@ -119,6 +113,4 @@ const makeStyles = (theme) => StyleSheet.create({
         fontSize: theme.fonts.$font_sm,
         fontFamily: theme.fonts.$sansBold,
     }
-
-
 });

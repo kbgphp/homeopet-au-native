@@ -3,8 +3,6 @@ import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { TOAST, getDimension } from "../../../utils"
 
-
-
 export default ({ props }) => {
     const theme = useTheme();
     const { window } = getDimension();

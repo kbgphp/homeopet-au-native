@@ -1,16 +1,12 @@
 
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { WebView } from 'react-native-webview';
 import { StyleSheet, Text, View,Image } from 'react-native';
 import { icons } from '../../../../constants';
 
-
-
 export default ({ web_rotate_3d_url }) => {
     const theme = useTheme();
     const styles = makeStyles(theme);
-
     return (
         <View style={styles.container3DBox}>
             <View style={{ alignItems: 'center' }}>

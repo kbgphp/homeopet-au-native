@@ -1,7 +1,6 @@
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
-import { images } from "../../constants"
 import { StyleSheet,Text,Image,View } from 'react-native';
+import { images } from "../../constants";
 
 export default ({ text }) => {
     const theme = useTheme();
@@ -14,7 +13,6 @@ export default ({ text }) => {
 
     );
 }
-
 
 const makeStyles = (theme) => StyleSheet.create({
     root: {

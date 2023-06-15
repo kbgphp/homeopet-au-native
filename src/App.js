@@ -3,7 +3,7 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import Main from './Main';
 import { theme } from './theme';
 import { NavigationContainer } from '@react-navigation/native';
-import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from './redux/store';
@@ -20,7 +20,6 @@ export default function App() {
   useEffect(() => {
     async function prepare() {
       try {
-
 
       } catch (e) {
         console.warn(e);

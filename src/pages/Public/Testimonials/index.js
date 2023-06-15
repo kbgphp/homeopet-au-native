@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, ActivityIndicator, FlatList, } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, Text, View, FlatList, } from "react-native";
 import Swiper from "react-native-web-swiper";
 import { useSelector } from 'react-redux';
 import { useTheme } from "react-native-paper";
@@ -88,8 +88,6 @@ export default function Testimonials(props) {
       </View>
     </>
   )
-
-
 
   return (
     <>

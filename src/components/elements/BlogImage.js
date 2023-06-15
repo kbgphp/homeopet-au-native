@@ -1,7 +1,5 @@
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, View, Text, Image } from 'react-native';
-
 
 export default ({ image, day, month }) => {
     const theme = useTheme();
@@ -16,7 +14,6 @@ export default ({ image, day, month }) => {
         </View>
     );
 }
-
 
 const makeStyles = (theme) => StyleSheet.create({
     imgContainer: {

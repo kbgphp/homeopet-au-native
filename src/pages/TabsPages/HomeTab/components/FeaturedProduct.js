@@ -1,10 +1,7 @@
-import * as React from 'react';
 import { StyleSheet, Text, Image, View, TouchableOpacity } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { trimText } from "../../../../utils";
 import { PinkHeaderWithBird } from "../../../../components/elements"
-
-
 
 export default ({ props, featuredProduct }) => {
     const theme = useTheme();
@@ -12,7 +9,6 @@ export default ({ props, featuredProduct }) => {
     const viewProduct = (id) => {
         props.navigation.navigate('ProductDetails', { productId: id });
     }
-
 
     return (
         <View style={styles.featuredProductBox}>

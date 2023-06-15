@@ -1,11 +1,9 @@
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default ({ props }) => {
     const theme = useTheme();
     const styles = makeStyles(theme);
-
     return (
         <View style={styles.root}>
             <TouchableOpacity activeOpacity={.8} onPress={() => props.navigation.goBack()} style={styles.link}>
@@ -14,7 +12,6 @@ export default ({ props }) => {
         </View>
     );
 }
-
 
 const makeStyles = (theme) => StyleSheet.create({
     root: {

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import SelectDropdown from 'react-native-select-dropdown';
 import { StyleSheet } from 'react-native';

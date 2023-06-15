@@ -1,7 +1,5 @@
-import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { useTheme } from 'react-native-paper';
-
 
 export default ({ props }) => {
     const theme = useTheme();
@@ -18,7 +16,6 @@ export default ({ props }) => {
         </View>
     );
 }
-
 
 const makeStyles = (theme) => StyleSheet.create({
     container: {

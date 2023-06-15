@@ -12,8 +12,6 @@ const Stack = createNativeStackNavigator();
 
 
 export default function ProductsTab() {
-
-
     return (
         <>
             <Stack.Navigator initialRouteName="CategoriesTab" screenOptions={{ headerShown: false }}>

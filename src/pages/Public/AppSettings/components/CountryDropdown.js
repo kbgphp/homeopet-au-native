@@ -1,7 +1,6 @@
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import SelectDropdown from 'react-native-select-dropdown';
-import {  StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default () => {
@@ -34,7 +33,7 @@ const makeStyles = (theme) => StyleSheet.create({
         maxWidth: 90,
         backgroundColor: '#FFF',
         height: 24,
-        paddingHorizontal:0
+        paddingHorizontal: 0
     },
     dropdownBtnTxtStyle: {
         color: theme.colors.$text,
@@ -45,7 +44,7 @@ const makeStyles = (theme) => StyleSheet.create({
     dropdownDropdownStyle: {
         backgroundColor: theme.colors.$white,
         height: 'auto',
-        borderRadius:6
+        borderRadius: 6
     },
     arrowIcon: {
         color: theme.colors.$text,
@@ -61,7 +60,7 @@ const makeStyles = (theme) => StyleSheet.create({
         color: theme.colors.$text,
         textAlign: 'right',
         paddingVertical: 0,
-        paddingRight:6,
+        paddingRight: 6,
         fontSize: theme.fonts.$font_sm,
         fontFamily: theme.fonts.$sansReg
     },

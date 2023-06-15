@@ -1,6 +1,5 @@
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 
 export default ({ data }) => {

@@ -1,19 +1,17 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
-import { StyleSheet, Text, Image, Linking, View, ScrollView, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
-import { BackTextButton, ProductListItem, QuickSearch } from "../../components/global";
+import { StyleSheet, Text, Linking, View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 
-
+import { BackTextButton, QuickSearch } from "../../components/global";
 import { PinkButton, ActivityLoader } from "../../components/elements"
 import SegmentSelector from "./components/SegmentSelector";
 import ListData from "./components/ListData";
 import ReviewList from "./components/ReviewList";
 import { _REST } from '../../services';
 import ProductImgDualSlider from './components/ProductImgDualSlider';
-import { useSelector, useDispatch } from 'react-redux';
+import { fetchProduct } from '../../redux/slices/productsDetailsArrObjSlice';
 
-
-import { fetchProductDetails } from '../../redux/slices/productDetailsSlice';
 
 export default function ProductDetails(props) {
     const { productId } = props?.route?.params;
@@ -22,14 +20,14 @@ export default function ProductDetails(props) {
     const dispatch = useDispatch();
     const [selectedTab, setSelectedTab] = React.useState('Symptoms');
     const [dataLoaded, setDataLoaded] = React.useState(false);
-    const PRODUCT = useSelector((state) => state?.productData?.data);
-    const { isProcessing } = useSelector((state) => state?.productData);
-    const { error } = useSelector((state) => state?.productData);
+    const { isProcessing } = useSelector((state) => state?.productsArrObj);
+    const { error } = useSelector((state) => state?.productsArrObj);
+    const PRODUCT = useSelector((state) => state?.productsArrObj?.productsDetailsArrObj?.[productId]);
 
     React.useEffect(() => {
         const getData = async () => {
             if (!!productId) {
-                dispatch(fetchProductDetails(productId)).then((res) => { setDataLoaded(true); })
+                dispatch(fetchProduct(productId)).then((res) => { setDataLoaded(true); })
                 if (error) {
                     props.navigation.goBack();
                 }
@@ -39,14 +37,16 @@ export default function ProductDetails(props) {
     }, [])
 
 
-
     const goTo = async (type) => {
-        await Linking.openURL(`https://homeopet.com.au/collections/all-products/${(type === 'Instore') ? '' : `?p=${productId}`}`);
+        if (type === 'Instore')
+            await Linking.openURL(`https://homeopet.com.au/collections/all-products/`);
+        else
+            await Linking.openURL(PRODUCT?.store_url);
     };
 
 
     const imageClicked = async (i) => {
-        props.navigation.navigate('ProductImagesSlider', { imgIndex: i });
+        props.navigation.navigate('ProductImagesSlider', { imgIndex: i, productId: productId });
     }
 
     return (

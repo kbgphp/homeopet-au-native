@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
-import { StyleSheet, Text, Image, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, View,  TouchableOpacity } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Swiper from 'react-native-web-swiper';
 import { icons } from '../../../constants';

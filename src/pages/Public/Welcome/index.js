@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, Image, View, Platform, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, Image, View, TouchableOpacity } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { images } from "../../../constants"
 import Swiper from 'react-native-web-swiper';

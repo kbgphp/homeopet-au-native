@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet,Text,Image} from 'react-native';
 import { images } from "../../constants"
@@ -12,7 +11,6 @@ export default ({text}) => {
         </Text>
     );
 }
-
 
 const makeStyles = (theme) => StyleSheet.create({
     pageHeader: {

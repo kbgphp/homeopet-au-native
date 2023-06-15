@@ -1,7 +1,5 @@
-import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, View } from 'react-native';
-
 
 export default ({ }) => {
     const theme = useTheme();
@@ -40,5 +38,4 @@ const makeStyles = (theme) => StyleSheet.create({
         maxWidth: 250,
         marginVertical: 18
     },
-
 })
