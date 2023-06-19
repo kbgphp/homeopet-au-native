@@ -79,7 +79,12 @@ export default function Testimonials(props) {
         <Text style={styles.header}>{category.toUpperCase()}</Text>
         <Swiper
           innerContainerStyle={{ height: 350 }}
-          controlsProps={{ prevPos: false, nextPos: false }}
+          controlsProps={{
+            dotsTouchable: true,
+            prevPos: false,
+            nextPos: false,
+            dotActiveStyle: { backgroundColor: theme.colors.$pink, height: 12, width: 12, borderRadius: 10 }
+          }}
         >
           {items.length > 0 && items.map((item, i) => (
             <Text style={styles.content} key={i}>{item.body}</Text>

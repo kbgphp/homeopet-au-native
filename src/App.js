@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
+import SplashScreen from 'react-native-splash-screen';
 import Main from './Main';
 import { theme } from './theme';
 import { NavigationContainer } from '@react-navigation/native';
@@ -12,7 +13,7 @@ import Toast from 'react-native-toast-message';
 import { toastConfig } from "./config";
 import { _REST } from './services';
 import { StatusBar, } from 'react-native';
-import { NetworkModal,NotificationModal } from './components/global';
+import { NetworkModal, NotificationModal } from './components/global';
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -32,7 +33,11 @@ export default function App() {
 
 
   const onLayoutRootView = useCallback(async () => {
-    if (appIsReady) { }
+    if (appIsReady) {
+      setTimeout(() => {
+        SplashScreen.hide()
+      }, 500);
+    }
   }, [appIsReady]);
 
   if (!appIsReady) {

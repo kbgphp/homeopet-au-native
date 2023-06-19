@@ -86,7 +86,13 @@ export default function ContactUs(props) {
             {contactData && contactData?.length > 0 ?
               <Swiper
                 innerContainerStyle={{ height: 230 }}
-                controlsProps={{ prevPos: false, nextPos: false }}
+                controlsProps={{
+                  dotsTouchable: true,
+                  prevPos: false,
+                  nextPos: false,
+                  dotActiveStyle: { backgroundColor: theme.colors.$pink, height: 12, width: 12, borderRadius: 10 }
+                }}
+
               >
                 {contactData && contactData?.length > 0 && contactData?.map((ele) => {
                   return ele.address.map((ele) => {
@@ -263,7 +269,7 @@ const makeStyles = (theme) =>
     addressHighlight: {
       color: theme.colors.$pink,
     },
-    bold:{
+    bold: {
       color: theme.colors.$text,
       fontFamily: theme.fonts.$sansBold,
     },
