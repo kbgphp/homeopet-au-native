@@ -1,11 +1,9 @@
 import { StyleSheet, Text, View, FlatList, KeyboardAvoidingView, Platform } from "react-native";
 import { useTheme } from 'react-native-paper';
-import { NavBar } from "../../../components/global";
-import { _REST } from "../../../services";
+import { NavBar,QuickSearch } from "@src/components/global";
+import { _REST } from "@src/services";
 import { useSelector } from 'react-redux';
-import { QuickSearch } from "../../../components/global";
 import BlogCard from "./components/BlogCard"
-
 
 export default function Blog(props) {
   const theme = useTheme();

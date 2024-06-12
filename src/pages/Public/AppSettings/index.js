@@ -3,11 +3,11 @@ import { useTheme } from 'react-native-paper';
 import { View, Text, TouchableOpacity, Linking, StyleSheet, Platform, ScrollView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { CountryDropdown, LanguageDropdown, RangeSlider, ModalPopUp } from "./components"
-import { CONFIG } from "../../../config";
-import { Switch } from "../../../components/elements";
-import { BackIconButton } from "../../../components/global"
+import { CONFIG } from "@src/config";
+import { Switch } from "@src/components/elements";
+import { BackIconButton } from "@src/components/global"
 import { useSelector, useDispatch } from 'react-redux';
-import { setCompetitionSetting, setNewAndSeasonalProductSetting, setBlogSetting, } from '../../../redux/slices/notificationSlice';
+import { setCompetitionSetting, setNewAndSeasonalProductSetting, setBlogSetting } from '@src/redux/slices/notificationSlice';
 
 export default function AppSetting(props) {
     useEffect(() => { props.navigation.setOptions({ headerLeft: () => <BackIconButton props={props} />, }) }, [])
@@ -30,7 +30,7 @@ export default function AppSetting(props) {
         setContactSupportModalOpen(false);
     }
     const rateAppOnStore = async () => {
-        await Linking.openURL(Platform.OS === 'android' ? APP_DATA?.google_play_url : APP_DATA?.apple_store_url);
+        await Linking.openURL(Platform.OS === 'android' ? 'market://details?id=com.homeopet.au' : APP_DATA?.apple_store_url);
         setStoreRatingModalOpen(false);
     }
 
@@ -42,6 +42,11 @@ export default function AppSetting(props) {
         value >= 8 ? setStoreRatingModalOpen(true) : setContactSupportModalOpen(true);
     }
 
+    const getVersion = () => {
+        let v = Platform.OS === 'android' ? CONFIG?.ANDROID_VER : CONFIG?.IOS_VER
+        return v.toString().replace(/\B(?=(\d{2})+(?!\d))/g, '.');;
+    };
+
     return (
         <>
             <ScrollView style={styles.scrollView}
@@ -52,7 +57,7 @@ export default function AppSetting(props) {
                 <View>
                     <View style={styles.header}>
                         <Text style={styles.pinkText}>{"Settings"}</Text>
-                        <TouchableOpacity activeOpacity={0.8} style={styles.button}  onPress={() =>props.navigation.goBack()} >
+                        <TouchableOpacity activeOpacity={0.8} style={styles.button} onPress={() => props.navigation.goBack()} >
                             <Text style={styles.pinkText}>{"Done"}</Text>
                         </TouchableOpacity>
                     </View>
@@ -131,7 +136,7 @@ export default function AppSetting(props) {
                     </TouchableOpacity>
                 </View>
                 <View>
-                    <Text style={styles.versionText} >v{CONFIG?.VERSION}</Text>
+                    <Text style={styles.versionText} >v{getVersion()}</Text>
                 </View>
 
                 < ModalPopUp

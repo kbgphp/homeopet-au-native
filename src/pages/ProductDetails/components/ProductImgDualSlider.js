@@ -3,9 +3,7 @@ import { useTheme } from 'react-native-paper';
 import { StyleSheet, Image, View,  TouchableOpacity } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Swiper from 'react-native-web-swiper';
-import { icons } from '../../../constants';
-
-
+import { icons } from '@src/constants';
 
 export default ({ props, product_gallery, imageClicked }) => {
     const theme = useTheme();

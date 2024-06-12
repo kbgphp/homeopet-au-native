@@ -2,7 +2,7 @@ import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, Platform, UIManager, LayoutAnimation, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { COLOR_CODES } from "./colorCodes"
-import { getDimension } from '../../../utils';
+import { getDimension } from '@src/utils';
 
 if (Platform.OS === 'android') {
     UIManager.setLayoutAnimationEnabledExperimental(true);

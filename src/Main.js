@@ -30,10 +30,8 @@ export default function Main() {
         if (Platform.OS === 'android') {
           PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);  //native way
         }
-
         const authStatus = await messaging().requestPermission();
         const enabled = authStatus === messaging.AuthorizationStatus.AUTHORIZED || authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
         if (enabled) {
           dispatch(setNotificationPermission(enabled));
           // await messaging().registerDeviceForRemoteMessages();

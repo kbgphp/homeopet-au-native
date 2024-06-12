@@ -67,6 +67,4 @@ const makeStyles = (theme) => StyleSheet.create({
     closeIcon: {
         fontSize: 40
     }
-
-
 })

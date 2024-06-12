@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import { BlogImage } from '../../../../components/elements';
+import { BlogImage } from '@src/components/elements';
 
 export default function BlogCard({ props, data }) {
 

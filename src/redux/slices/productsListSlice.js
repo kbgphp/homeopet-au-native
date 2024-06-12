@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { _REST } from '../../services';
+import { _REST } from '@src/services';
 
 const initialState = {
   PRODUCTS: {},
@@ -46,7 +46,7 @@ export const fetchProducts = (symptom_id) => async dispatch => {
   try {
     dispatch(productsFetchStart());
     const res = await _REST.CUSTOM_POST("symptom-products", { symptom_id, origin : "au" });
-    dispatch(res?.data ? productsFetchSuccess(res?.data?.medicines) : productsFetchError())
+    dispatch(res?.data?.medicines ? productsFetchSuccess(res?.data?.medicines) : productsFetchError())
     return res.data
   } catch (e) {
     dispatch(productsFetchError());

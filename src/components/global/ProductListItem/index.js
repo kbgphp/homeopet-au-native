@@ -1,6 +1,6 @@
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, Image, View, TouchableOpacity } from 'react-native';
-import { trimText } from "../../../utils";
+import { trimText } from "@src/utils";
 
 export default ({ props, data, img = '' }) => {
     const theme = useTheme();
@@ -19,7 +19,7 @@ export default ({ props, data, img = '' }) => {
                     <Text style={styles.productName}>{data?.title}</Text>
                     <Text style={styles.productDesc}>{trimText(140, data?.body_html)}</Text>
                     <TouchableOpacity activeOpacity={.8} onPress={() => viewProduct(data?.id)} style={{ marginTop: 12 }}>
-                        <Text style={styles.viewProduct}>{"View product..."}</Text>
+                        <Text style={styles.viewProduct}>{"View Product..."}</Text>
                     </TouchableOpacity>
                 </View>
             </TouchableOpacity>
@@ -52,6 +52,7 @@ const makeStyles = (theme) => StyleSheet.create({
         color: theme.colors.$dark_green,
         fontSize: theme.fonts.$font_xl,
         fontFamily: theme.fonts.$sansReg,
+        textTransform:'uppercase'
     },
     productDesc: {
         fontSize: theme.fonts.$font_sm,

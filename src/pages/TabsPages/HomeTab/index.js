@@ -5,9 +5,7 @@ import ProductDetails from "../../ProductDetails";
 import SearchResults from "../../SearchResults";
 import ProductImagesSlider from "../../ProductImagesSlider";
 import { About, Blog, BlogDetails, ContactUs, FAQs, Testimonials } from "../../Public"
-
 const Stack = createNativeStackNavigator();
-
 
 export default function ProductsTab() {
 
@@ -34,7 +32,3 @@ export default function ProductsTab() {
         </>
     );
 }
-
-
-
-

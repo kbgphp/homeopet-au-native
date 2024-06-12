@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { useTheme } from 'react-native-paper';
-import { ActivityLoader, BlogImage } from '../../../components/elements';
-import { _REST } from "../../../services";
-import { BackTextButton } from "../../../components/global";
+import { ActivityLoader, BlogImage } from '@src/components/elements';
+import { BackTextButton } from "@src/components/global";
+import { _REST } from "@src/services";
 
 export default function BlogDetails(props) {
     const theme = useTheme();

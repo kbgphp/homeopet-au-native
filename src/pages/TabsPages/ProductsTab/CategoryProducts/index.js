@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, View, KeyboardAvoidingView, FlatList,Platform } from 'react-native';
-import { BackTextButton, ProductListItem, QuickSearch } from "../../../../components/global"
-import { _REST } from '../../../../services';
-import { ActivityLoader, NoDataFound } from '../../../../components/elements';
+import { BackTextButton, ProductListItem, QuickSearch } from "@src/components/global"
+import { _REST } from '@src/services';
+import { ActivityLoader, NoDataFound } from '@src/components/elements';
 
 export default function CategoryProducts(props) {
     const theme = useTheme();

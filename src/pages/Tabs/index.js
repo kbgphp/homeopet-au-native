@@ -8,8 +8,8 @@ import HomeTab from '../TabsPages/HomeTab';
 import ProductsTab from '../TabsPages/ProductsTab';
 import SearchTab from '../TabsPages/SearchTab';
 import SymptomsCheckerTab from '../TabsPages/SymptomsCheckerTab';
-import { LogoTitle } from '../../components/elements';
-import { HeaderRight, ExitModal } from '../../components/global';
+import { LogoTitle } from '@src/components/elements';
+import { HeaderRight, ExitModal } from '@src/components/global';
 
 
 const Tab = createBottomTabNavigator();

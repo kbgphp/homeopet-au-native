@@ -1,6 +1,6 @@
 import { useTheme } from 'react-native-paper';
 import { StyleSheet,Text,Image,View } from 'react-native';
-import { images } from "../../constants";
+import { images } from "@src/constants"
 
 export default ({ text }) => {
     const theme = useTheme();

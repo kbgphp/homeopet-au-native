@@ -1,13 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, Image, View, TouchableOpacity } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import { images } from "../../../constants"
 import Swiper from 'react-native-web-swiper';
-import { getDimension } from '../../../utils';
 import { useSelector, useDispatch } from 'react-redux';
-import { appOpened } from '../../../redux/slices/isFirstTimeSlice';
-import { getAppData } from '../../../redux/slices/appDataSlice';
-import { ActivityLoader } from "../../../components/elements"
+
+import { images } from "@src/constants"
+import { getDimension } from '@src/utils';
+import { appOpened } from '@src/redux/slices/isFirstTimeSlice';
+import { getAppData } from '@src/redux/slices/appDataSlice';
+import { ActivityLoader } from "@src/components/elements"
 
 export default function WelcomeScreen(props) {
     const swiperRef = React.useRef(null);

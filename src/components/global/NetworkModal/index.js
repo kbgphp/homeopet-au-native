@@ -3,7 +3,7 @@ import NetInfo from '@react-native-community/netinfo';
 import { useTheme } from 'react-native-paper';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import Modal from "react-native-modal";
-import { images } from '../../../constants';
+import { images } from '@src/constants';
 
 export default ({ }) => {
     const theme = useTheme();

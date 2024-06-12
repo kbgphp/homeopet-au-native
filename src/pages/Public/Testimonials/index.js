@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View, FlatList, } from "react-native";
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
 import Swiper from "react-native-web-swiper";
 import { useSelector } from 'react-redux';
 import { useTheme } from "react-native-paper";
-import { NavBar } from "../../../components/global";
-import { _REST } from "../../../services";
-import { ActivityLoader } from "../../../components/elements";
+import { format } from 'date-fns';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import { NavBar, StarRating } from "@src/components/global";
+import { _REST } from "@src/services";
+import { ActivityLoader } from "@src/components/elements";
 
 export default function Testimonials(props) {
   const theme = useTheme();
@@ -17,10 +20,26 @@ export default function Testimonials(props) {
   const [loading, setLoading] = React.useState(false);
   const [totalPages, setTotalPages] = React.useState(0);
 
+  const swiperHeight = 490;   // 330/490 in case expanded
+  const expandedSwiperHeight = 490;
+  const [heightObj, setHeightObj] = React.useState({});
+  const showExpandBtn = false;
+
+  useEffect(() => {
+    Object.keys(TESTIMONIALS?.review).map((key, index) => {
+      setHeightObj(heightObj => ({ ...heightObj, [key]: swiperHeight }));
+    });
+  }, []);
+
+  const changeSwiperHeight = (key) => {
+    setHeightObj(heightObj => ({ ...heightObj, [key]: heightObj[key] === swiperHeight ? expandedSwiperHeight : swiperHeight }));
+  }
+
+
 
   useEffect(() => {
     setTestimonialsData(TESTIMONIALS);
-    setTotalPages(TESTIMONIALS.total_pages)
+    setTotalPages(TESTIMONIALS.total_pages);
   }, [TESTIMONIALS]);
 
 
@@ -76,9 +95,9 @@ export default function Testimonials(props) {
   const renderList = ({ item: [category, items], index }) => (
     <>
       <View style={[styles.item, index % 2 !== 0 && styles.oddItem]}>
-        <Text style={styles.header}>{category.toUpperCase()}</Text>
+        <Text style={styles.categoryName}>{category.toUpperCase()}</Text>
         <Swiper
-          innerContainerStyle={{ height: 350 }}
+          innerContainerStyle={{ height: heightObj[category] }}
           controlsProps={{
             dotsTouchable: true,
             prevPos: false,
@@ -87,9 +106,26 @@ export default function Testimonials(props) {
           }}
         >
           {items.length > 0 && items.map((item, i) => (
-            <Text style={styles.content} key={i}>{item.body}</Text>
+            <View key={i}>
+              {item.title ? <Text style={styles.title} >"{item.title}"</Text> : null}
+              <Text style={styles.content} >{item.body}</Text>
+              <View style={{ alignItems: 'center', marginVertical: 8 }}>
+                <StarRating rating={item?.rating} />
+                <Text style={styles.author} >- {item.author}
+                  <Text style={styles.date} >{", "} {format(new Date(item?.review_date), "MMMM do, yyyy")}</Text>
+                </Text>
+              </View>
+            </View>
           ))}
         </Swiper>
+        {showExpandBtn ?
+          <TouchableOpacity activeOpacity={.8} onPress={() => changeSwiperHeight(category)} style={styles.viewMoreBtn}>
+            <Text style={styles.viewMoreText}>{(heightObj[category] === swiperHeight) ? "Expand" : 'View Less'}{" "}
+              <Ionicons name={(heightObj[category] === swiperHeight) ? 'arrow-down' : 'arrow-up'} size={14} color={theme.colors.$white} />
+            </Text>
+          </TouchableOpacity> : null
+        }
+
       </View>
     </>
   )
@@ -113,7 +149,7 @@ export default function Testimonials(props) {
 const makeStyles = (theme) =>
   StyleSheet.create({
     section: {
-      backgroundColor: "#ffffff",
+      backgroundColor: theme.colors.$white,
       flex: 1
     },
     pageTitle: {
@@ -124,25 +160,67 @@ const makeStyles = (theme) =>
       color: theme.colors.$pink,
       fontFamily: theme.fonts.$serifReg,
     },
-    header: {
+    categoryName: {
       textAlign: "center",
-      fontSize: 18,
+      fontSize: theme.fonts.$font_xl,
       color: theme.colors.$light_green,
       paddingVertical: 18,
       textTransform: "capitalize",
       fontFamily: theme.fonts.$serifReg,
     },
+    title: {
+      color: theme.colors.$text,
+      fontFamily: theme.fonts.$serifBold,
+      fontSize: theme.fonts.$font_std,
+      fontStyle: 'italic',
+    },
     content: {
       color: theme.colors.$text,
       fontFamily: theme.fonts.$sansReg,
-      fontSize: 14,
+      fontSize: theme.fonts.$font_sm,
+      opacity: 0.8
+    },
+    author: {
+      color: theme.colors.$text,
+      fontFamily: theme.fonts.$serifBold,
+      fontSize: theme.fonts.$font_sm,
+      fontStyle: 'italic',
+    },
+    date: {
+      color: theme.colors.$text,
+      fontFamily: theme.fonts.$sansReg,
+      fontSize: 10,
+      opacity: 0.6
     },
     item: {
       paddingHorizontal: 20,
-      backgroundColor: "#ffffff",
+      backgroundColor: theme.colors.$white,
+      position: 'relative'
     },
     oddItem: {
-      backgroundColor: "#f4f4f4",
+      backgroundColor: theme.colors.$light,
+    },
+    viewMoreBtn: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'absolute',
+      alignSelf: 'center',
+      bottom: 35
+    },
+    viewMoreText: {
+      color: theme.colors.$white,
+      fontFamily: theme.fonts.$sansBold,
+      fontSize: theme.fonts.$font_xs,
+      backgroundColor: theme.colors.$pink,
+      borderRadius: 50,
+      paddingHorizontal: 12,
+      paddingVertical: 3,
+      shadowColor: '#000',
+      shadowOffset: { width: 3, height: 3 },
+      shadowOpacity: 0.9,
+      shadowRadius: 3,
+      elevation: 15,
+
     },
     loader: {
       flex: 1,

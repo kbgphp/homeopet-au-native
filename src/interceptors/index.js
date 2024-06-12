@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { TOAST } from "../utils";
-import { CONFIG } from "../config"
+import { TOAST } from "@src/utils";
+import { CONFIG } from "@src/config"
 
 
 

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, Image, View, TouchableOpacity } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import { trimText } from "../../../../utils";
-import { PinkHeaderWithBird } from "../../../../components/elements"
+import { trimText } from "@src/utils";
+import { PinkHeaderWithBird } from "@src/components/elements"
 
 export default ({ props, featuredProduct }) => {
     const theme = useTheme();

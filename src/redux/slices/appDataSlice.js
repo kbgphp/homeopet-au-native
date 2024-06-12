@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { _REST } from '../../services';
+import { _REST } from '@src/services';
 
 const initialState = {
   BIG_DATA: {},

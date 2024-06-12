@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, View, FlatList, KeyboardAvoidingView, Platform } from 'react-native';
-import { BackTextButton, ProductListItem, QuickSearch } from "../../components/global"
-import { _REST } from '../../services';
-import { ActivityLoader, NoDataFound } from '../../components/elements';
+import { BackTextButton, ProductListItem, QuickSearch } from "@src/components/global"
+import { _REST } from '@src/services';
+import { ActivityLoader, NoDataFound } from '@src/components/elements';
 
 export default function SearchResults(props) {
     const theme = useTheme();
@@ -75,7 +75,7 @@ export default function SearchResults(props) {
                         renderItem={({ item }) => <ProductListItem props={props} data={item} />}
                         ListHeaderComponent={<Header />}
                         ListFooterComponent={renderFooter}
-                        ListEmptyComponent={<NoDataFound text={'No data found'} />}
+                        ListEmptyComponent={<NoDataFound text={'No formula found'} />}
                         onEndReachedThreshold={0.5}
                         onEndReached={({ distanceFromEnd }) => {
                             if (distanceFromEnd === 0) return;

@@ -2,23 +2,19 @@ import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, Linking, View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-
-import { BackTextButton, QuickSearch } from "../../components/global";
-import { PinkButton, ActivityLoader } from "../../components/elements"
-import SegmentSelector from "./components/SegmentSelector";
-import ListData from "./components/ListData";
-import ReviewList from "./components/ReviewList";
-import { _REST } from '../../services';
-import ProductImgDualSlider from './components/ProductImgDualSlider';
-import { fetchProduct } from '../../redux/slices/productsDetailsArrObjSlice';
-
+import { BackTextButton, QuickSearch } from "@src/components/global";
+import { PinkButton, ActivityLoader } from "@src/components/elements"
+import { SegmentSelector, Content, ReviewList, ProductImgDualSlider } from "./components"
+import { _REST } from '@src/services';
+import { fetchProduct } from '@src/redux/slices/productsDetailsArrObjSlice';
+import { CONFIG } from '@src/config';
 
 export default function ProductDetails(props) {
     const { productId } = props?.route?.params;
     const theme = useTheme();
     const styles = makeStyles(theme);
     const dispatch = useDispatch();
-    const [selectedTab, setSelectedTab] = React.useState('Symptoms');
+    const [selectedTab, setSelectedTab] = React.useState('Description');
     const [dataLoaded, setDataLoaded] = React.useState(false);
     const { isProcessing } = useSelector((state) => state?.productsArrObj);
     const { error } = useSelector((state) => state?.productsArrObj);
@@ -39,7 +35,7 @@ export default function ProductDetails(props) {
 
     const goTo = async (type) => {
         if (type === 'Instore')
-            await Linking.openURL(`https://homeopet.com.au/collections/all-products/`);
+            await Linking.openURL(CONFIG.IN_STORE_LINK);
         else
             await Linking.openURL(PRODUCT?.store_url);
     };
@@ -66,32 +62,28 @@ export default function ProductDetails(props) {
                     >
                         <View style={{ backgroundColor: 'white', paddingHorizontal: 20 }}>
                             <Text style={styles.productName}>{PRODUCT?.title}</Text>
-                            <Text style={styles.productDesc}>{PRODUCT?.body_html}</Text>
+                            {/* <Text style={styles.productDesc}>{PRODUCT?.body_html}</Text> */}
                         </View>
-
                         <ProductImgDualSlider props={props} product_gallery={PRODUCT?.product_gallery} imageClicked={imageClicked} />
-
                         <View style={{ flexDirection: 'row', paddingHorizontal: 14, marginTop: 12, marginBottom: 18 }}>
                             <PinkButton text={'Shop Online'} goTo={() => goTo('Online')} />
                             <PinkButton text={'Shop Instore'} goTo={() => goTo('Instore')} />
                         </View>
-
                         <SegmentSelector selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
                         <View style={{ marginTop: 12, marginBottom: 18 }}>
-                            {selectedTab === 'Symptoms' && <ListData data={PRODUCT?.symptoms} />}
-                            {selectedTab === 'Benefits' && <ListData data={PRODUCT?.benefits} />}
+                            {selectedTab === 'Description' && <Content data={PRODUCT?.body_html?.description?.description} />}
+                            {selectedTab === 'Advice Care' && <Content data={PRODUCT?.body_html?.advice?.description} />}
+                            {selectedTab === 'Ingredients' && <Content data={PRODUCT?.body_html?.ingredients?.description} />}
+                            {/* {selectedTab === 'Benefits' && <ListData data={PRODUCT?.benefits} />} */}
                             {selectedTab === 'Reviews' && <ReviewList data={PRODUCT?.review} />}
                         </View>
                     </ScrollView> : null
                 }
-
                 <QuickSearch props={props} />
             </KeyboardAvoidingView>
         </View>
     );
 }
-
-
 
 const makeStyles = (theme) => StyleSheet.create({
     scrollView: {
@@ -103,15 +95,14 @@ const makeStyles = (theme) => StyleSheet.create({
         color: theme.colors.$green,
         fontFamily: theme.fonts.$sansReg,
         marginTop: 12,
-        marginBottom: 4
+        marginBottom: 4,
+        textTransform: 'uppercase'
     },
-
     productDesc: {
         lineHeight: 18,
         fontSize: theme.fonts.$font_sm,
         color: theme.colors.$text,
         fontWeight: 400,
         fontFamily: theme.fonts.$sansReg,
-    },
-
+    }
 });

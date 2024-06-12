@@ -1,6 +1,6 @@
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, View } from 'react-native';
-import { format } from 'date-fns'
+import { format } from 'date-fns';
 
 export default ({ data }) => {
     const theme = useTheme();
@@ -9,7 +9,7 @@ export default ({ data }) => {
         <View style={styles.root}>
             {!!data && data?.length > 0 ?
                 (data.map((item, i) => (
-                    <View key={i} style={[styles.listItem, (i !== data?.length - 1) ? styles.bottomBorder : '', { paddingTop: (i !== 0) ? 6 : 2 }]}>
+                    <View key={i} style={[styles.listItem, (i !== data?.length - 1) ? styles.bottomBorder : '', i % 2 !== 0 && styles.oddItem, { paddingTop: (i !== 0) ? 6 : 2 }]}>
                         <Text style={styles.bodyText}>"{item?.body}"</Text>
                         <Text style={styles.author}>{item?.author} - <Text style={styles.date}>{format(new Date(item?.review_date), "MMMM do, yyyy")}</Text></Text>
                     </View>
@@ -63,4 +63,7 @@ const makeStyles = (theme) => StyleSheet.create({
         borderRadius: 50,
         backgroundColor: theme.colors.$text,
     },
+    oddItem: {
+        backgroundColor: theme.colors.$light,
+      },
 });

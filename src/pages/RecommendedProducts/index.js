@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, View, FlatList, Platform, KeyboardAvoidingView } from 'react-native';
-import { BackTextButton, ProductListItem, QuickSearch } from "../../components/global"
-import { _REST } from '../../services';
-import { NoDataFound } from '../../components/elements';
+import { BackTextButton, ProductListItem, QuickSearch } from "@src/components/global"
+import { _REST } from '@src/services';
+import { NoDataFound } from '@src/components/elements';
 import { useSelector, } from 'react-redux';
 
 export default function RecommendedProducts(props) {

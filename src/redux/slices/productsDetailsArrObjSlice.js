@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { _REST } from '../../services';
+import { _REST } from '@src/services';
 import { store } from '../store';
 
 const initialState = {
@@ -68,6 +68,3 @@ export const fetchProduct = (product_id) => async dispatch => {
     dispatch(productFetchError());
   }
 }
-
-
-

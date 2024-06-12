@@ -1,17 +1,19 @@
-npx react-native-asset => custom fonts 
+# npx react-native-asset => custom fonts 
 ========================
-npx react-native start
+# npx react-native start
+=======================
+# https://play.google.com/store/apps/details?id=com.homeopet.www.aus
 ========================
-react native vectors icon
-1.add react-native.config.file
-2.Android - setup app/build gradle only 
-ios- 
--$ npx pod-install ios 
--add manually font family in info.plist
+# react native vectors icon
+1. add react-native.config.file
+2. Android - setup app/build gradle only 
+## ios
+1. $ npx pod-install ios 
+2. add manually font family in info.plist
 ========================
-Update Android=> app=> build.gradle
+Update Android=> app => build.gradle
 ======================
-const { width: windowWidth } = Dimensions.get('window');
+
 ===========================
 Firebase ios setup
 add these in pod file

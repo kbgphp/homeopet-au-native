@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BackIconButton } from "../../../components/global"
+import { BackIconButton } from "@src/components/global"
 import { WebView } from 'react-native-webview';
 import { useTheme } from 'react-native-paper';
 

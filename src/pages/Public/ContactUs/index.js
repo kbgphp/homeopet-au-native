@@ -1,13 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, TextInput, View, ScrollView, Button, } from "react-native";
 import Swiper from "react-native-web-swiper";
-import { Link } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { useTheme } from "react-native-paper";
-import { NavBar } from "../../../components/global";
-import { _REST } from "../../../services";
-import { ActivityLoader } from '../../../components/elements';
-import { TOAST } from "../../../utils";
+import { NavBar } from "@src/components/global";
+import { _REST } from "@src/services";
+import { ActivityLoader } from '@src/components/elements';
+import { TOAST } from "@src/utils";
 
 
 export default function ContactUs(props) {
@@ -20,8 +19,7 @@ export default function ContactUs(props) {
   const [emailValidError, setEmailValidError] = React.useState("");
   const [validate, setValidate] = React.useState(false);
   const [contactLoader, setContactLoader] = React.useState(false);
-  const contactData = useSelector((state) => state.appData.BIG_DATA.contact);
-
+  const contactData = useSelector((state) => state.appData.BIG_DATA.contact[0]);
 
   const handleValidEmail = (val) => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
@@ -60,7 +58,6 @@ export default function ContactUs(props) {
   };
 
 
-
   return (
     <>
       <NavBar props={props} />
@@ -73,75 +70,60 @@ export default function ContactUs(props) {
           <Text style={styles.pageTitle}>{"Contact Us"}</Text>
           <View>
             <View>
-              <Text style={styles.pageDesc}>
-                Our <Text style={styles.link}><Link to={{ screen: 'FAQs' }}> FAQ page </Link></Text>
-                provides answers TOAST some of the more common question about our products.However,if you
-                haven't found the answer to your question or for any other
-                information,please contact us using the form below and we''ll get
-                back to you as soon as we can.
-              </Text>
+              <Text style={styles.pageDesc}>{contactData?.heading}</Text>
             </View>
 
-
-            {contactData && contactData?.length > 0 ?
+            {contactData?.address && contactData?.address?.length > 0 ?
               <Swiper
-                innerContainerStyle={{ height: 230 }}
-                controlsProps={{
-                  dotsTouchable: true,
-                  prevPos: false,
-                  nextPos: false,
-                  dotActiveStyle: { backgroundColor: theme.colors.$pink, height: 12, width: 12, borderRadius: 10 }
-                }}
-
+                innerContainerStyle={{ height: 160 }}
+                controlsEnabled={false}
               >
-                {contactData && contactData?.length > 0 && contactData?.map((ele) => {
-                  return ele.address.map((ele) => {
-                    return <View>
-                      {ele?.name && <Text style={styles.addressHeader}>{ele?.name}</Text>}
-                      {ele?.company && <Text style={styles.addressText}>{ele?.company}</Text>}
-                      {ele?.address && <Text style={styles.addressText}>{ele?.address}</Text>}
-                      {ele?.distribution &&
-                        <Text>
-                          <Text style={styles.bold}>Distribution : </Text>
-                          <Text style={styles.addressText}>{ele?.distribution}</Text>
-                        </Text>
-                      }
+                {contactData?.address?.map((ele,i) => (
+                  <View key={i}>
+                    {ele?.name && <Text style={styles.addressHeader}>{ele?.name}</Text>}
+                    {ele?.company && <Text style={styles.addressText}>{ele?.company}</Text>}
+                    {ele?.address && <Text style={styles.addressText}>{ele?.address}</Text>}
+                    {ele?.distribution &&
+                      <Text>
+                        <Text style={styles.bold}>Distribution : </Text>
+                        <Text style={styles.addressText}>{ele?.distribution}</Text>
+                      </Text>
+                    }
 
-                      {ele?.phone?.home &&
-                        <Text >
-                          <Text style={styles.bold}>Home : </Text>
-                          <Text style={styles.addressText}>{ele?.phone?.home}</Text>
-                        </Text>
-                      }
+                    {ele?.phone?.home &&
+                      <Text >
+                        <Text style={styles.bold}>Home : </Text>
+                        <Text style={styles.addressText}>{ele?.phone?.home}</Text>
+                      </Text>
+                    }
 
-                      {ele?.phone?.isd &&
-                        <Text >
-                          <Text style={styles.bold}>INTL. : </Text>
-                          <Text style={styles.addressText}>{ele?.phone?.isd}</Text>
-                        </Text>
-                      }
+                    {ele?.phone?.isd &&
+                      <Text >
+                        <Text style={styles.bold}>INTL. : </Text>
+                        <Text style={styles.addressText}>{ele?.phone?.isd}</Text>
+                      </Text>
+                    }
 
-                      {
-                        ele?.email &&
-                        <Text >
-                          <Text style={styles.bold}>Email : </Text>
-                          <Text style={styles?.addressHighlight}>
-                            {ele.email}
-                          </Text>
+                    {
+                      ele?.email &&
+                      <Text >
+                        <Text style={styles.bold}>Email : </Text>
+                        <Text style={styles?.addressHighlight}>
+                          {ele.email}
                         </Text>
-                      }
+                      </Text>
+                    }
 
-                      {
-                        ele?.website &&
-                        <Text >
-                          <Text style={styles.bold}>Website :{" "}</Text>
-                          <Text style={styles.addressHighlight}> {ele?.website}</Text>
-                        </Text>
-                      }
-                    </View>
-                  })
-                })
-                }
+                    {
+                      ele?.website &&
+                      <Text >
+                        <Text style={styles.bold}>Website :{" "}</Text>
+                        <Text style={styles.addressHighlight}> {ele?.website}</Text>
+                      </Text>
+                    }
+                  </View>
+                )
+                )}
               </Swiper> : <ActivityLoader />
             }
 
@@ -149,7 +131,7 @@ export default function ContactUs(props) {
           {/* contact us form */}
           <View>
             <View style={{ alignItems: "center" }}>
-              <Text style={styles.bodyText}>Get in touch</Text>
+              <Text style={styles.formHeader}>Get in touch</Text>
             </View>
             <View>
               <Text style={styles.inputLabel}>Your Name*</Text>
@@ -246,10 +228,10 @@ const makeStyles = (theme) =>
       fontFamily: theme.fonts.$serifReg,
     },
     pageDesc: {
-      fontSize: theme.fonts.$font_std,
-      color: theme.colors.$light_green,
+      fontSize: theme.fonts.$font_sm,
+      color: theme.colors.$text,
       paddingBottom: 22,
-      fontFamily: theme.fonts.$serifReg,
+      fontFamily: theme.fonts.$sansReg,
     },
     link: {
       fontSize: theme.fonts.$font_std,
@@ -272,6 +254,12 @@ const makeStyles = (theme) =>
     bold: {
       color: theme.colors.$text,
       fontFamily: theme.fonts.$sansBold,
+    },
+    formHeader:{
+      fontSize: theme.fonts.$font_std,
+      color: theme.colors.$pink,
+      fontFamily: theme.fonts.$serifBold,
+      marginBottom:18
     },
     inputField: {
       paddingVertical: 0,

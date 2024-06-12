@@ -9,3 +9,4 @@ export { default as HeaderRight } from "./HeaderRight";
 export { default as ExitModal } from "./ExitModal";
 export { default as NetworkModal } from "./NetworkModal";
 export { default as NotificationModal } from "./NotificationModal";
+export { default as StarRating } from "./StarRating";

@@ -1,9 +1,9 @@
 import { useTheme } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import { StyleSheet, Text, Image, View, ScrollView, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
-import { NavBar, QuickSearch } from "../../../../components/global"
-import { PinkHeaderWithBird } from "../../../../components/elements"
-import { getDimension } from '../../../../utils';
+import { NavBar, QuickSearch } from "@src/components/global"
+import { PinkHeaderWithBird } from "@src/components/elements"
+import { getDimension } from '@src/utils';
 
 
 export default function CategoriesTab(props, setIsNavbarPage) {

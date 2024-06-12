@@ -2,7 +2,7 @@
 import { useTheme } from 'react-native-paper';
 import { WebView } from 'react-native-webview';
 import { StyleSheet, Text, View,Image } from 'react-native';
-import { icons } from '../../../../constants';
+import { icons } from '@src/constants';
 
 export default ({ web_rotate_3d_url }) => {
     const theme = useTheme();

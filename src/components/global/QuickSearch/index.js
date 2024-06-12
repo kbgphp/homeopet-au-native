@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
-import { TOAST, getDimension } from "../../../utils"
+import { TOAST, getDimension } from "@src/utils"
 
 export default ({ props }) => {
     const theme = useTheme();

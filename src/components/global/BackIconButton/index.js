@@ -1,5 +1,5 @@
 import { View, Image, TouchableOpacity } from 'react-native';
-import { icons } from "../../../constants"
+import { icons } from "@src/constants"
 
 export default ({ props }) => {
     return (

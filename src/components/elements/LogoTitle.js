@@ -1,5 +1,5 @@
 import { Image } from 'react-native';
-import { images } from "../../constants"
+import { images } from "@src/constants"
 
 export default () => {
     return (

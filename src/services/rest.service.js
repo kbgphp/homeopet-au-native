@@ -1,5 +1,5 @@
-import { CONFIG } from "../config";
-import { axios } from "../interceptors";
+import { CONFIG } from "@src/config";
+import { axios } from "@src/interceptors";
 
 const handleError = err => {
     return Promise.reject(err?.response?.data);

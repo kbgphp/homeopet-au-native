@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useTheme } from 'react-native-paper';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
-import { NavBar, ProductListItem, Disclaimer, ProblemAreaKey } from "../../../components/global"
-import { PinkHeaderWithBird, ActivityLoader, NoDataFound } from "../../../components/elements"
+import { NavBar, ProductListItem, Disclaimer, ProblemAreaKey } from "@src/components/global"
+import { PinkHeaderWithBird, ActivityLoader, NoDataFound } from "@src/components/elements"
 import Canine from "./components/Canine"
 import Feline from "./components/Feline"
 import Equine from "./components/Equine"
 import SegmentSelector from "./components/SegmentSelector";
-import { _REST } from '../../../services';
+import { _REST } from '@src/services';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 export default function SymptomsCheckerTab(props) {

@@ -4,8 +4,8 @@ import { useTheme } from "react-native-paper";
 import { useSelector } from 'react-redux';
 import Icon from "react-native-vector-icons/FontAwesome";
 
-import { ActivityLoader } from "../../../components/elements";
-import { NavBar } from "../../../components/global";
+import { ActivityLoader } from "@src/components/elements";
+import { NavBar } from "@src/components/global";
 
 
 export default function FAQs(props) {
@@ -60,7 +60,7 @@ export default function FAQs(props) {
       <Text style={styles.pageTitle}>{"FAQs"}</Text>
       <View style={styles.container}>
         <View>
-          <Text style={styles.heading}> We have compiled an FAQ to help answer some of the more common questions asked about HomeoPet.</Text>
+          <Text style={styles.heading}>We have compiled an FAQ to help answer some of the more common questions asked about HomeoPet.</Text>
         </View>
         <View>
           <Text style={styles.pageDesc}>

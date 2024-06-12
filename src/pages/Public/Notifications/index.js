@@ -4,11 +4,11 @@ import { useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { ActivityLoader } from '../../../components/elements';
-import { BackIconButton } from "../../../components/global"
+import { ActivityLoader } from '@src/components/elements';
+import { BackIconButton } from "@src/components/global"
 import NotificationOff from "./NotificationOff";
 import ZeroNotification from './ZeroNotification';
-import { resetNotificationCount } from '../../../redux/slices/notificationSlice';
+import { resetNotificationCount } from '@src/redux/slices/notificationSlice';
 
 export default function Notifications(props) {
     React.useEffect(() => {
