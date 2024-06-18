@@ -12,8 +12,6 @@
 2. add manually font family in info.plist
 ========================
 Update Android=> app => build.gradle
-======================
-
 ===========================
 Firebase ios setup
 add these in pod file
