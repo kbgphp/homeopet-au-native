@@ -26,7 +26,7 @@ export default function HomeTab(props) {
     }, []);
 
     const updateThisApp = async () => {
-        await Linking.openURL(Platform.OS === 'android' ? 'market://details?id=com.homeopet.au' : BIG_DATA?.home?.apple_store_url);
+        await Linking.openURL(Platform.OS === 'android' ? CONFIG.PLAY_STORE : BIG_DATA?.home?.apple_store_url);
         setUpdateAppModalOpen(false);
     }
 

@@ -1,4 +1,4 @@
-package com.homeopet.au;
+package com.homeopet.app.au;
 import android.os.Bundle; // here
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

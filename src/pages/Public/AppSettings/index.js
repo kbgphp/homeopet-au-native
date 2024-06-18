@@ -30,7 +30,7 @@ export default function AppSetting(props) {
         setContactSupportModalOpen(false);
     }
     const rateAppOnStore = async () => {
-        await Linking.openURL(Platform.OS === 'android' ? 'market://details?id=com.homeopet.au' : APP_DATA?.apple_store_url);
+        await Linking.openURL(Platform.OS === 'android' ? CONFIG.PLAY_STORE : APP_DATA?.apple_store_url);
         setStoreRatingModalOpen(false);
     }
 

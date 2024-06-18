@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:40360760090:android:fb31e018e7b976bb4a12a3",
+        "mobilesdk_app_id": "1:40360760090:android:d73283473425583c4a12a3",
         "android_client_info": {
-          "package_name": "com.homeopet.au"
+          "package_name": "com.homeopet.app.au"
         }
       },
       "oauth_client": [],
