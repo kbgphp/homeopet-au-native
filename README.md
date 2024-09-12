@@ -28,3 +28,9 @@ add these in pod file
  cQO07z7uVkWXvfkih93eo8:APA91bEGnmGAcV3Cjy4tx8V7rSClB1aEOmJku2Bw44xn7R65N11CqRrkeXCXPXeEFIm_LclCAGpIv9oQ3-NkZfcoAzbN700wZNRQ7BLF3pmcndXbfEEdk4D4ekrxjGJrCuFuuf3TfJ8f
 
  icon - https://cdn.shopify.com/s/files/1/0507/2365/1778/files/logo_web_600x.png?v=1614294542
+
+
+==================================
+ <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/notification_icon" />
+
+======================

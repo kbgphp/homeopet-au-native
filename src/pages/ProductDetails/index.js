@@ -44,9 +44,8 @@ export default function ProductDetails(props) {
     const imageClicked = async (i) => {
         props.navigation.navigate('ProductImagesSlider', { imgIndex: i, productId: productId });
     }
-
+    
     return (
-
         <View style={{ flex: 1 }}>
             <BackTextButton props={props} />
             <KeyboardAvoidingView
